@@ -43,8 +43,9 @@
   .streak small{font-size:10.5px;color:var(--muted);letter-spacing:.5px;text-transform:uppercase}
 
   .seg{display:flex;background:var(--surface);border:1px solid var(--border);border-radius:13px;padding:4px;margin:6px 0 18px}
-  .seg button{flex:1;border:0;background:transparent;color:var(--muted);font-family:var(--disp);font-weight:600;
-    font-size:14px;padding:10px;border-radius:9px;cursor:pointer;transition:.18s;letter-spacing:.3px}
+  .seg button{flex:1;min-width:0;border:0;background:transparent;color:var(--muted);font-family:var(--disp);font-weight:600;
+    font-size:11.5px;padding:10px 2px;border-radius:9px;cursor:pointer;transition:.18s;letter-spacing:0;
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .seg button.on{background:var(--surface2);color:var(--text);box-shadow:0 2px 8px -3px #000}
 
   .rail{display:flex;gap:9px;overflow-x:auto;padding:2px 16px 14px;scrollbar-width:none;margin:0 -16px}
@@ -131,6 +132,60 @@
     font-family:var(--disp);font-weight:700;font-size:15px;cursor:pointer;z-index:10;display:none;
     box-shadow:0 10px 28px -8px var(--ember);align-items:center;justify-content:center;gap:8px}
   .install.show{display:flex;animation:rise .3s both}
+
+  .cardhd{font-family:var(--disp);font-weight:700;font-size:15px;margin:0 0 12px}
+  .linkbtn{background:transparent;border:0;color:var(--ember);font-family:var(--disp);font-weight:600;font-size:12px;cursor:pointer;padding:0}
+
+  .calhero{text-align:center;padding:2px 0 10px}
+  .calhero b{font-family:var(--disp);font-size:34px;font-weight:800;color:var(--text);line-height:1}
+  .calhero span{font-size:13px;color:var(--muted)}
+
+  .pbar{height:10px;border-radius:6px;background:var(--surface2);overflow:hidden;position:relative}
+  .pbar i{display:block;height:100%;border-radius:6px;background:var(--ember);transition:width .3s}
+
+  .weekdots{display:flex;justify-content:space-between;margin-top:16px}
+  .wd{display:flex;flex-direction:column;align-items:center;gap:7px}
+  .wd .lbl{font-size:10.5px;color:var(--faint);font-family:var(--disp);font-weight:600}
+  .wd .dot{width:27px;height:27px;border-radius:50%;border:1.5px solid var(--border);background:var(--surface2);display:grid;place-items:center}
+  .wd .dot svg{width:13px;height:13px;stroke:var(--green);stroke-width:3;fill:none}
+  .wd.done .dot{background:var(--green);border-color:var(--green)}
+  .wd.done .dot svg{stroke:#0E1116}
+  .wd.today .lbl{color:var(--ember)}
+  .wd.today .dot{box-shadow:0 0 0 3px var(--ember-soft)}
+
+  .stats3{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:12px}
+  .stat{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:13px 6px;text-align:center}
+  .stat b{display:block;font-family:var(--disp);font-size:20px;font-weight:800;color:var(--text);line-height:1.2}
+  .stat small{font-size:9.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px}
+
+  .barchart{display:flex;align-items:flex-end;gap:8px;height:130px;padding:0 2px}
+  .bcol{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:6px}
+  .bcol .bv{font-size:9.5px;color:var(--muted);font-family:var(--disp);font-weight:600}
+  .bcol .bwrap{width:100%;max-width:28px;flex:1;display:flex;align-items:flex-end}
+  .bcol .bfill{width:100%;border-radius:6px 6px 3px 3px;background:var(--ember);min-height:4px}
+  .bcol.today .bfill{background:var(--gold)}
+  .bcol .bl{font-size:10.5px;color:var(--faint);font-family:var(--disp);font-weight:600}
+  .bcol.today .bl{color:var(--ember)}
+
+  .macro{display:flex;align-items:center;gap:9px;margin-top:11px}
+  .macro .dot2{width:9px;height:9px;border-radius:50%;flex:0 0 auto}
+  .macro .mname{font-size:12px;color:var(--text);width:52px;flex:0 0 auto}
+  .macro .mbar{flex:1;height:8px;border-radius:5px;background:var(--surface2);overflow:hidden}
+  .macro .mbar i{display:block;height:100%;border-radius:5px}
+  .macro .mval{font-size:11px;color:var(--muted);font-family:var(--disp);font-weight:600;flex:0 0 auto;white-space:nowrap}
+
+  .mrow{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:6px}
+
+  .meal{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)}
+  .meal:last-child{border-bottom:0}
+  .meal .mi{flex:1;min-width:0}
+  .meal .mi .n{font-family:var(--disp);font-weight:600;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .meal .mi .m{font-size:11px;color:var(--muted);margin-top:2px}
+  .meal .kcal{font-family:var(--disp);font-weight:700;font-size:14px;color:var(--gold);text-align:right;white-space:nowrap;flex:0 0 auto}
+  .meal .kcal small{display:block;font-weight:400;color:var(--faint);font-size:9px}
+  .meal .del{width:28px;height:28px;border-radius:9px;border:1px solid var(--border);background:var(--surface2);
+    color:var(--faint);display:grid;place-items:center;cursor:pointer;flex:0 0 auto;font-size:12px}
+  .meal .del:active{background:var(--ember-soft);color:var(--ember)}
 </style>
 </head>
 <body>
@@ -151,6 +206,8 @@
 
   <div class="seg">
     <button id="tabWork" class="on" onclick="setView('workout')">ออกกำลังกาย</button>
+    <button id="tabDash" onclick="setView('dashboard')">สรุป</button>
+    <button id="tabNutri" onclick="setView('nutrition')">โภชนาการ</button>
     <button id="tabHist" onclick="setView('history')">ประวัติ</button>
   </div>
 
@@ -163,6 +220,8 @@
     <div id="exList"></div>
   </div>
 
+  <div id="dashboardView" style="display:none"></div>
+  <div id="nutritionView" style="display:none"></div>
   <div id="historyView" style="display:none"></div>
 </div>
 
@@ -220,9 +279,11 @@ const PLAN={
 };
 const EX_BY_ID={};for(const d in PLAN)PLAN[d].ex.forEach(e=>EX_BY_ID[e.id]={...e,day:+d});
 
-let state={view:'workout',day:1,data:{logs:{}}};
+let state={view:'workout',day:1,data:{logs:{},nutrition:{goals:{cal:2000,protein:150,carb:200,fat:65},logs:{}}}};
 
 function tkey(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
+function dkey(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function fmtDate(k){const[y,m,d]=k.split('-');const mo=['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];return `${+d} ${mo[+m-1]} ${(+y+543)%100}`}
 function entries(id){return (state.data.logs[id]||[]).slice().sort((a,b)=>a.date<b.date?-1:1)}
 function todayEntry(id){return (state.data.logs[id]||[]).find(e=>e.date===tkey())}
@@ -239,7 +300,13 @@ function save(){
 }
 function scheduleSave(){clearTimeout(saveTimer);saveTimer=setTimeout(save,500)}
 function load(){
-  try{const v=localStorage.getItem(STORE_KEY);if(v){const d=JSON.parse(v);if(d&&d.logs)state.data=d}}
+  try{const v=localStorage.getItem(STORE_KEY);if(v){const d=JSON.parse(v);if(d&&d.logs){
+    state.data.logs=d.logs;
+    if(d.nutrition){
+      state.data.nutrition.goals={...state.data.nutrition.goals,...(d.nutrition.goals||{})};
+      state.data.nutrition.logs=d.nutrition.logs||{};
+    }
+  }}}
   catch(e){/* first run */}
 }
 
@@ -255,13 +322,53 @@ function streak(){
   return count;
 }
 
+function weekDates(){
+  const d=new Date();const dow=(d.getDay()+6)%7;const mon=new Date(d);mon.setDate(d.getDate()-dow);
+  const arr=[];for(let i=0;i<7;i++){const x=new Date(mon);x.setDate(mon.getDate()+i);arr.push(dkey(x))}
+  return arr;
+}
+function trainedSet(){
+  const s=new Set();
+  for(const id in state.data.logs)for(const e of state.data.logs[id])if(e.sets.some(x=>x.done))s.add(e.date);
+  return s;
+}
+function dayVolume(date){
+  let total=0;
+  for(const id in state.data.logs){
+    const ex=EX_BY_ID[id];if(!ex||ex.t!=='db')continue;
+    const e=state.data.logs[id].find(x=>x.date===date);
+    if(e)total+=volume(e,ex.t);
+  }
+  return total;
+}
+function daySets(date){
+  let c=0;
+  for(const id in state.data.logs){
+    const e=state.data.logs[id].find(x=>x.date===date);
+    if(e)c+=e.sets.filter(s=>s.done).length;
+  }
+  return c;
+}
+function nutriDay(date){return state.data.nutrition.logs[date]||[]}
+function nutriTotals(date){
+  return nutriDay(date).reduce((a,m)=>({cal:a.cal+(+m.cal||0),protein:a.protein+(+m.protein||0),carb:a.carb+(+m.carb||0),fat:a.fat+(+m.fat||0)}),{cal:0,protein:0,carb:0,fat:0});
+}
+function addMeal(date,meal){state.data.nutrition.logs[date]=state.data.nutrition.logs[date]||[];state.data.nutrition.logs[date].push(meal);scheduleSave()}
+function deleteMeal(date,id){state.data.nutrition.logs[date]=(state.data.nutrition.logs[date]||[]).filter(m=>m.id!==id);scheduleSave()}
+
 function setView(v){
   state.view=v;
   document.getElementById('tabWork').classList.toggle('on',v==='workout');
+  document.getElementById('tabDash').classList.toggle('on',v==='dashboard');
+  document.getElementById('tabNutri').classList.toggle('on',v==='nutrition');
   document.getElementById('tabHist').classList.toggle('on',v==='history');
   document.getElementById('workoutView').style.display=v==='workout'?'':'none';
+  document.getElementById('dashboardView').style.display=v==='dashboard'?'':'none';
+  document.getElementById('nutritionView').style.display=v==='nutrition'?'':'none';
   document.getElementById('historyView').style.display=v==='history'?'':'none';
   if(v==='history')renderHistory();
+  if(v==='dashboard')renderDashboard();
+  if(v==='nutrition')renderNutrition();
 }
 
 function renderRail(){
@@ -354,6 +461,166 @@ function renderRailDot(){
     if(!active&&dot)dot.remove();
   });
 }
+function macroBar(name,val,goal,color){
+  const pct=goal?Math.min(100,val/goal*100):0;
+  return `<div class="macro"><span class="dot2" style="background:${color}"></span><span class="mname">${name}</span>
+    <div class="mbar"><i style="width:${pct}%;background:${color}"></i></div>
+    <span class="mval">${Math.round(val)}/${goal} ก.</span></div>`;
+}
+
+function renderDashboard(){
+  const v=document.getElementById('dashboardView');
+  const today=tkey();
+  const wdates=weekDates();
+  const trained=trainedSet();
+  const daysTrained=wdates.filter(d=>trained.has(d)).length;
+  const pctRaw=daysTrained*20;
+  const pctBar=Math.min(100,pctRaw);
+  const weekVol=wdates.reduce((s,d)=>s+dayVolume(d),0);
+  const weekSets=wdates.reduce((s,d)=>s+daySets(d),0);
+  const maxVol=Math.max(1,...wdates.map(d=>dayVolume(d)));
+  const dayLabels=['จ','อ','พ','พฤ','ศ','ส','อา'];
+  const nt=nutriTotals(today);
+  const goals=state.data.nutrition.goals;
+
+  const sub=daysTrained>5?`ทำเกินเป้าหมาย +${daysTrained-5} วัน เยี่ยมมาก! 🔥`
+    :daysTrained===5?'ครบเป้าหมายสัปดาห์นี้แล้ว! 🎉'
+    :'แต่ละวันที่ออกกำลังกาย = 20% ของเป้าหมาย';
+
+  const weekDotsHtml=wdates.map((d,i)=>{
+    const isToday=d===today;const done=trained.has(d);
+    return `<div class="wd ${done?'done':''} ${isToday?'today':''}"><div class="dot">${done?chkIcon():''}</div><div class="lbl">${dayLabels[i]}</div></div>`;
+  }).join('');
+
+  const barsHtml=wdates.map((d,i)=>{
+    const vol=dayVolume(d);const h=vol?Math.max(6,Math.round(vol/maxVol*100)):0;
+    const isToday=d===today;
+    return `<div class="bcol ${isToday?'today':''}"><div class="bv">${vol?Math.round(vol).toLocaleString():''}</div>
+      <div class="bwrap"><div class="bfill" style="height:${h}%"></div></div><div class="bl">${dayLabels[i]}</div></div>`;
+  }).join('');
+
+  v.innerHTML=`
+    <div class="hcard">
+      <div class="cardhd">เป้าหมายสัปดาห์นี้ <span style="color:var(--muted);font-weight:400">· ${Math.min(daysTrained,5)}/5 วัน</span></div>
+      <div class="calhero"><b>${pctRaw}%</b><span><br>${sub}</span></div>
+      <div class="pbar"><i style="width:${pctBar}%"></i></div>
+      <div class="weekdots">${weekDotsHtml}</div>
+    </div>
+
+    <div class="stats3">
+      <div class="stat"><b>${streak()}</b><small>วันติดต่อกัน</small></div>
+      <div class="stat"><b>${Math.round(weekVol).toLocaleString()}</b><small>กก. วอลุ่ม</small></div>
+      <div class="stat"><b>${weekSets}</b><small>เซ็ตสัปดาห์นี้</small></div>
+    </div>
+
+    <div class="hcard">
+      <div class="cardhd">วอลุ่มรายวัน (สัปดาห์นี้)</div>
+      <div class="barchart">${barsHtml}</div>
+    </div>
+
+    <div class="hcard">
+      <div class="cardhd" style="display:flex;justify-content:space-between;align-items:center">โภชนาการวันนี้
+        <button class="linkbtn" onclick="setView('nutrition')">ไปหน้าโภชนาการ →</button></div>
+      <div class="calhero"><b>${Math.round(nt.cal).toLocaleString()}</b><span> / ${goals.cal.toLocaleString()} กแคล</span></div>
+      <div class="pbar"><i style="width:${goals.cal?Math.min(100,nt.cal/goals.cal*100):0}%"></i></div>
+      ${macroBar('โปรตีน',nt.protein,goals.protein,'var(--ember)')}
+      ${macroBar('คาร์บ',nt.carb,goals.carb,'var(--gold)')}
+      ${macroBar('ไขมัน',nt.fat,goals.fat,'var(--green)')}
+    </div>
+  `;
+}
+
+function renderNutrition(){
+  const v=document.getElementById('nutritionView');
+  const today=tkey();
+  const nt=nutriTotals(today);
+  const goals=state.data.nutrition.goals;
+  const meals=nutriDay(today).slice().reverse();
+
+  const mealsHtml=meals.length?meals.map(m=>`
+    <div class="meal">
+      <div class="mi"><div class="n">${escapeHtml(m.name)}</div><div class="m">P ${Math.round(m.protein)||0} · C ${Math.round(m.carb)||0} · F ${Math.round(m.fat)||0} ก.</div></div>
+      <div class="kcal">${Math.round(m.cal)||0}<small>กแคล</small></div>
+      <div class="del" data-id="${m.id}">✕</div>
+    </div>`).join(''):`<div style="text-align:center;color:var(--faint);font-size:12.5px;padding:16px 0">ยังไม่มีมื้ออาหารวันนี้</div>`;
+
+  const dates=Object.keys(state.data.nutrition.logs).filter(d=>d!==today&&state.data.nutrition.logs[d].length).sort().reverse();
+  const histHtml=dates.map(d=>{
+    const t=nutriTotals(d);
+    return `<div class="hcard"><div class="hd">
+        <div><div class="hdate">${fmtDate(d)}</div></div>
+        <div class="hvol"><b>${Math.round(t.cal).toLocaleString()}</b><small>กแคล</small></div>
+      </div>
+      <div class="hex">
+        <div class="hex-row"><span>โปรตีน</span><span>${Math.round(t.protein)} ก.</span></div>
+        <div class="hex-row"><span>คาร์บ</span><span>${Math.round(t.carb)} ก.</span></div>
+        <div class="hex-row"><span>ไขมัน</span><span>${Math.round(t.fat)} ก.</span></div>
+      </div></div>`;
+  }).join('');
+
+  v.innerHTML=`
+    <div class="hcard">
+      <div class="cardhd" style="display:flex;justify-content:space-between;align-items:center">เป้าหมายวันนี้
+        <button class="linkbtn" id="editGoalsBtn">แก้ไขเป้าหมาย</button></div>
+      <div class="calhero"><b>${Math.round(nt.cal).toLocaleString()}</b><span> / ${goals.cal.toLocaleString()} กแคล</span></div>
+      <div class="pbar"><i style="width:${goals.cal?Math.min(100,nt.cal/goals.cal*100):0}%"></i></div>
+      ${macroBar('โปรตีน',nt.protein,goals.protein,'var(--ember)')}
+      ${macroBar('คาร์บ',nt.carb,goals.carb,'var(--gold)')}
+      ${macroBar('ไขมัน',nt.fat,goals.fat,'var(--green)')}
+      <div id="goalEdit" style="display:none;margin-top:14px;border-top:1px solid var(--border);padding-top:14px">
+        <div class="mrow">
+          <div class="fld"><label>กแคล</label><input type="number" inputmode="numeric" id="gCal" value="${goals.cal}"></div>
+          <div class="fld"><label>โปรตีน</label><input type="number" inputmode="numeric" id="gP" value="${goals.protein}"></div>
+          <div class="fld"><label>คาร์บ</label><input type="number" inputmode="numeric" id="gC" value="${goals.carb}"></div>
+          <div class="fld"><label>ไขมัน</label><input type="number" inputmode="numeric" id="gF" value="${goals.fat}"></div>
+        </div>
+        <button class="addset" id="saveGoals" style="margin-top:10px">บันทึกเป้าหมาย</button>
+      </div>
+    </div>
+
+    <div class="hcard">
+      <div class="cardhd">เพิ่มมื้ออาหาร</div>
+      <div class="fld" style="margin-bottom:8px"><label>ชื่ออาหาร</label><input type="text" id="mName" placeholder="เช่น ข้าวไก่ย่าง"></div>
+      <div class="mrow">
+        <div class="fld"><label>กแคล</label><input type="number" inputmode="numeric" id="mCal"></div>
+        <div class="fld"><label>โปรตีน</label><input type="number" inputmode="numeric" id="mP"></div>
+        <div class="fld"><label>คาร์บ</label><input type="number" inputmode="numeric" id="mC"></div>
+        <div class="fld"><label>ไขมัน</label><input type="number" inputmode="numeric" id="mF"></div>
+      </div>
+      <button class="addset" id="addMealBtn" style="margin-top:10px">+ เพิ่มมื้ออาหาร</button>
+    </div>
+
+    <div class="hcard">
+      <div class="cardhd">มื้ออาหารวันนี้</div>
+      ${mealsHtml}
+    </div>
+
+    ${histHtml}
+  `;
+
+  document.getElementById('editGoalsBtn').addEventListener('click',()=>{
+    const el=document.getElementById('goalEdit');el.style.display=el.style.display==='none'?'block':'none';
+  });
+  document.getElementById('saveGoals').addEventListener('click',()=>{
+    goals.cal=+document.getElementById('gCal').value||goals.cal;
+    goals.protein=+document.getElementById('gP').value||goals.protein;
+    goals.carb=+document.getElementById('gC').value||goals.carb;
+    goals.fat=+document.getElementById('gF').value||goals.fat;
+    scheduleSave();renderNutrition();
+  });
+  document.getElementById('addMealBtn').addEventListener('click',()=>{
+    const name=document.getElementById('mName').value.trim();
+    const cal=+document.getElementById('mCal').value||0;
+    const protein=+document.getElementById('mP').value||0;
+    const carb=+document.getElementById('mC').value||0;
+    const fat=+document.getElementById('mF').value||0;
+    if(!name&&!cal&&!protein&&!carb&&!fat)return;
+    addMeal(today,{id:'m'+Date.now()+Math.random().toString(36).slice(2,6),name:name||'มื้ออาหาร',cal,protein,carb,fat});
+    renderNutrition();
+  });
+  v.querySelectorAll('.del').forEach(btn=>btn.addEventListener('click',()=>{deleteMeal(today,btn.dataset.id);renderNutrition()}));
+}
+
 function renderHistory(){
   const v=document.getElementById('historyView');const byDate={};
   for(const id in state.data.logs)for(const e of state.data.logs[id]){
