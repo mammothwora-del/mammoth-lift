@@ -8,6 +8,8 @@ A minimal, installable workout tracker PWA for a 5-day recomposition split (Push
 - Remembers your last session per exercise and flags new PRs
 - Daily streak counter
 - Workout history view with per-day volume totals
+- Multiple user profiles — switch between people sharing the same device, each with their own separate workout/nutrition history
+- Equipment checklist (per person) and a form/posture guide for every exercise, grouped by Push / Pull / Legs / Shoulders / Full Body
 - Installable as a PWA (Add to Home Screen) with offline support via a service worker
 - All data stored locally in the browser (`localStorage`) — nothing leaves your device
 

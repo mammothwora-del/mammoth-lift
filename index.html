@@ -47,6 +47,7 @@
     font-size:13.5px;padding:10px 6px;border-radius:9px;cursor:pointer;transition:.18s;letter-spacing:.2px;
     white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .seg button.on{background:var(--surface2);color:var(--text);box-shadow:0 2px 8px -3px #000}
+  .seg button.full{grid-column:1/-1}
 
   .rail{display:flex;gap:9px;overflow-x:auto;padding:2px 16px 14px;scrollbar-width:none;margin:0 -16px}
   .rail::-webkit-scrollbar{display:none}
@@ -186,6 +187,69 @@
   .meal .del{width:28px;height:28px;border-radius:9px;border:1px solid var(--border);background:var(--surface2);
     color:var(--faint);display:grid;place-items:center;cursor:pointer;flex:0 0 auto;font-size:12px}
   .meal .del:active{background:var(--ember-soft);color:var(--ember)}
+
+  .profilebar{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--surface);
+    border:1px solid var(--border);border-radius:13px;padding:9px 12px;margin:0 0 14px;cursor:pointer;transition:.15s}
+  .profilebar:active{background:var(--surface2)}
+  .pinfo{display:flex;align-items:center;gap:10px;min-width:0}
+  .pavatar{width:34px;height:34px;border-radius:10px;background:var(--surface2);display:grid;place-items:center;
+    font-size:17px;flex:0 0 auto}
+  .ptext b{font-family:var(--disp);font-size:13.5px;display:block;line-height:1.25;font-weight:600}
+  .ptext span{font-size:10.5px;color:var(--muted)}
+  .pswitch{font-family:var(--disp);font-weight:600;font-size:12px;color:var(--ember);background:var(--ember-soft);
+    border:0;padding:7px 12px;border-radius:9px;flex:0 0 auto}
+
+  .overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:flex-end;justify-content:center;z-index:20}
+  .overlay.show{display:flex}
+  .sheet{background:var(--surface);border:1px solid var(--border);border-radius:20px 20px 0 0;
+    padding:18px 16px calc(18px + env(safe-area-inset-bottom));width:100%;max-width:520px;max-height:80vh;
+    overflow-y:auto;animation:sheetup .25s cubic-bezier(.2,.7,.3,1) both}
+  @keyframes sheetup{from{transform:translateY(30px);opacity:0}to{transform:none;opacity:1}}
+  .sheethd{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+  .sheethd h3{font-family:var(--disp);font-size:16.5px;margin:0}
+  .sheetclose{background:var(--surface2);border:0;color:var(--muted);width:30px;height:30px;border-radius:9px;
+    font-size:14px;cursor:pointer;flex:0 0 auto}
+  .urow{display:flex;align-items:center;gap:11px;padding:9px 6px;border-radius:12px;cursor:pointer;transition:.15s}
+  .urow:active{background:var(--surface2)}
+  .urow.active{background:var(--ember-soft)}
+  .urow .un{flex:1;min-width:0}
+  .urow .un b{font-family:var(--disp);font-size:14.5px;display:block;font-weight:600}
+  .urow .un span{font-size:10.5px;color:var(--muted)}
+  .urow .udel{width:30px;height:30px;border-radius:9px;border:1px solid var(--border);background:var(--surface2);
+    color:var(--faint);display:grid;place-items:center;font-size:12px;flex:0 0 auto}
+  .udel:active{background:var(--ember-soft);color:var(--ember)}
+  .uadd{display:flex;gap:8px;margin-top:8px;padding-top:12px;border-top:1px solid var(--border)}
+  .uadd input{flex:1;min-width:0;background:var(--surface2);border:1px solid var(--border);border-radius:10px;
+    color:var(--text);font-family:var(--body);font-size:14px;padding:11px 12px;outline:none}
+  .uadd input:focus{border-color:var(--ember)}
+  .uadd button{background:var(--ember);border:0;color:#fff;font-family:var(--disp);font-weight:700;font-size:13px;
+    padding:0 16px;border-radius:10px;cursor:pointer;flex:0 0 auto}
+
+  .eqrow{display:flex;align-items:center;justify-content:space-between;padding:10px 2px;border-bottom:1px solid var(--border)}
+  .eqrow:last-child{border-bottom:0}
+  .eqrow .en{font-size:13.5px}
+  .chk.on{background:var(--green);border-color:var(--green)}
+  .chk.on svg{stroke:#0E1116}
+  .guide-ex{padding:11px 0;border-bottom:1px solid var(--border)}
+  .guide-ex:last-child{border-bottom:0}
+  .eqtags{display:flex;flex-wrap:wrap;gap:6px;margin:7px 0 6px}
+  .eqtag{font-size:10px;font-family:var(--disp);font-weight:600;background:var(--green-soft);color:var(--green);
+    padding:3px 8px;border-radius:20px}
+  .eqtag.miss{background:var(--ember-soft);color:var(--ember)}
+  .tips{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:3px}
+  .tips li{font-size:12px;color:var(--muted);line-height:1.5}
+
+  .exicopic{width:38px;height:38px;border-radius:10px;background:var(--surface2);display:grid;place-items:center;
+    flex:0 0 auto;color:var(--muted)}
+  .exicon{display:block}
+  .dayhead{align-items:center}
+  .dayhead .dhinfo{min-width:0}
+  .dayhead .dhinfo .cnt{display:block;margin-top:2px}
+  .pickrow{display:flex;align-items:flex-start;gap:10px;padding:11px 4px;border-bottom:1px solid var(--border)}
+  .pickrow:last-child{border-bottom:0}
+  .pickinfo{flex:1;min-width:0}
+  .pickname{font-family:var(--disp);font-weight:600;font-size:14px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+  .rec{font-size:9.5px;background:var(--green-soft);color:var(--green);padding:2px 7px;border-radius:20px;font-weight:700;letter-spacing:.2px}
 </style>
 </head>
 <body>
@@ -204,18 +268,30 @@
     </div>
   </header>
 
+  <div class="profilebar" id="profilebar">
+    <div class="pinfo">
+      <div class="pavatar" id="pAvatar">🦣</div>
+      <div class="ptext"><b id="pName">ฉัน</b><span>แตะเพื่อเปลี่ยน/เพิ่มคน</span></div>
+    </div>
+    <button class="pswitch" type="button">เปลี่ยน</button>
+  </div>
+
   <div class="seg">
     <button id="tabWork" class="on" onclick="setView('workout')">ออกกำลังกาย</button>
     <button id="tabNutri" onclick="setView('nutrition')">โภชนาการ</button>
     <button id="tabDash" onclick="setView('dashboard')">สรุป</button>
     <button id="tabHist" onclick="setView('history')">ประวัติ</button>
+    <button id="tabGuide" class="full" onclick="setView('guide')">อุปกรณ์ &amp; ท่าทาง</button>
   </div>
 
   <div id="workoutView">
     <div class="rail" id="rail"></div>
     <div class="dayhead">
-      <h2 id="dayTitle"></h2>
-      <span class="cnt" id="dayCnt"></span>
+      <div class="dhinfo">
+        <h2 id="dayTitle"></h2>
+        <span class="cnt" id="dayCnt"></span>
+      </div>
+      <button class="linkbtn" onclick="openExercisePicker()">แก้ไขท่าเล่น</button>
     </div>
     <div id="exList"></div>
   </div>
@@ -223,63 +299,322 @@
   <div id="dashboardView" style="display:none"></div>
   <div id="nutritionView" style="display:none"></div>
   <div id="historyView" style="display:none"></div>
+  <div id="guideView" style="display:none"></div>
 </div>
 
 <button class="install" id="installBtn">⬇ ติดตั้งแอปลงเครื่อง</button>
 <div class="savenote" id="savenote"><span class="d"></span>บันทึกแล้ว</div>
 
+<div class="overlay" id="profileOverlay">
+  <div class="sheet">
+    <div class="sheethd"><h3>เปลี่ยน/จัดการผู้ใช้</h3><button class="sheetclose" id="profileClose">✕</button></div>
+    <div id="userList"></div>
+    <div class="uadd">
+      <input type="text" id="newUserName" placeholder="ชื่อคนใหม่...">
+      <button id="addUserBtn" type="button">+ เพิ่ม</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="exPickerOverlay">
+  <div class="sheet">
+    <div class="sheethd"><h3 id="exPickerTitle">เลือกท่าเล่น</h3><button class="sheetclose" id="exPickerClose">✕</button></div>
+    <div style="font-size:11.5px;color:var(--muted);margin-bottom:8px">ท่าที่มี <span style="color:var(--green)">✓ อุปกรณ์ครบ</span> จะแนะนำให้ก่อน ตามเช็คลิสต์อุปกรณ์ของคุณ</div>
+    <div id="exPickerList"></div>
+  </div>
+</div>
+
 <script>
-const STORE_KEY='mammoth-workout-v1';
+const STORE_KEY='mammoth-workout-v2';
+const OLD_STORE_KEY='mammoth-workout-v1';
+
+const EQUIPMENT_LIST=[
+  {id:'db',n:'ดัมเบล (ปรับน้ำหนักได้/คงที่)'},
+  {id:'bench',n:'ม้านั่งปรับระดับ'},
+  {id:'mat',n:'เสื่อ/แผ่นรองออกกำลังกาย'},
+  {id:'pullup',n:'บาร์โหว่งตัว / คานดึงข้อ'},
+  {id:'band',n:'ยางยืดออกกำลังกาย'},
+  {id:'kb',n:'เคทเทิลเบล'},
+  {id:'rope',n:'เชือกกระโดด'},
+  {id:'barbell',n:'บาร์เบลและแผ่นน้ำหนัก'},
+  {id:'rack',n:'แร็คสควอท'},
+  {id:'box',n:'กล่อง/แท่นก้าวขึ้น (Step box)'},
+  {id:'foam',n:'โฟมโรลเลอร์'},
+];
+
+const RDL_TIPS=[
+  'ยืนแยกเท้าประมาณสะโพก ดัมเบลอยู่หน้าต้นขา',
+  'ดันสะโพกไปด้านหลัง หลังตรง เข่างอเล็กน้อยคงที่ตลอดท่า',
+  'ลดดัมเบลลงตามแนวขาจนรู้สึกยืดที่ต้นขาด้านหลัง แล้วดันสะโพกกลับขึ้นยืนตรง',
+];
+const CURL_TIPS=[
+  'ยืนหรือนั่ง ศอกแนบลำตัวตลอดการเคลื่อนไหว',
+  'เคิร์ลขึ้นโดยไม่แกว่งตัวหรือเหวี่ยงไหล่ช่วย',
+  'ควบคุมจังหวะลงช้าๆ เพื่อเพิ่มแรงต้าน',
+];
+
+const EX_ICONS={
+  pressLying:'<line x1="12" y1="40" x2="38" y2="40"/><circle cx="46" cy="40" r="6" fill="currentColor" stroke="none"/><line x1="12" y1="40" x2="14" y2="54"/><line x1="14" y1="54" x2="6" y2="52"/><line x1="34" y1="40" x2="34" y2="16"/><line x1="40" y1="40" x2="40" y2="16"/><circle cx="34" cy="13" r="4" fill="currentColor" stroke="none"/><circle cx="40" cy="13" r="4" fill="currentColor" stroke="none"/>',
+  pressForward:'<circle cx="20" cy="12" r="6" fill="currentColor" stroke="none"/><line x1="20" y1="18" x2="20" y2="38"/><line x1="20" y1="38" x2="14" y2="58"/><line x1="20" y1="38" x2="26" y2="58"/><line x1="20" y1="22" x2="44" y2="22"/><circle cx="47" cy="22" r="4" fill="currentColor" stroke="none"/><line x1="20" y1="26" x2="44" y2="26"/><circle cx="47" cy="26" r="4" fill="currentColor" stroke="none"/>',
+  pushup:'<line x1="10" y1="44" x2="44" y2="36"/><circle cx="50" cy="34" r="6" fill="currentColor" stroke="none"/><line x1="10" y1="44" x2="6" y2="56"/><line x1="34" y1="38" x2="34" y2="48"/><line x1="34" y1="48" x2="42" y2="54"/>',
+  fly:'<line x1="12" y1="40" x2="38" y2="40"/><circle cx="46" cy="40" r="6" fill="currentColor" stroke="none"/><line x1="12" y1="40" x2="14" y2="54"/><line x1="14" y1="54" x2="6" y2="52"/><line x1="38" y1="40" x2="56" y2="30"/><circle cx="58" cy="28" r="4" fill="currentColor" stroke="none"/><line x1="38" y1="40" x2="52" y2="52"/><circle cx="54" cy="54" r="4" fill="currentColor" stroke="none"/>',
+  tricep:'<circle cx="30" cy="10" r="6" fill="currentColor" stroke="none"/><line x1="30" y1="16" x2="30" y2="36"/><line x1="30" y1="36" x2="24" y2="58"/><line x1="30" y1="36" x2="36" y2="58"/><line x1="30" y1="18" x2="40" y2="8"/><line x1="40" y1="8" x2="34" y2="20"/><circle cx="34" cy="20" r="4" fill="currentColor" stroke="none"/>',
+  dip:'<line x1="46" y1="46" x2="58" y2="46"/><circle cx="38" cy="22" r="6" fill="currentColor" stroke="none"/><line x1="38" y1="28" x2="38" y2="42"/><line x1="38" y1="42" x2="20" y2="48"/><line x1="38" y1="30" x2="46" y2="38"/><line x1="46" y1="38" x2="50" y2="46"/>',
+  row:'<circle cx="48" cy="16" r="6" fill="currentColor" stroke="none"/><line x1="44" y1="22" x2="20" y2="48"/><line x1="20" y1="48" x2="16" y2="58"/><line x1="20" y1="48" x2="24" y2="58"/><line x1="40" y1="26" x2="32" y2="36"/><line x1="32" y1="36" x2="26" y2="40"/><circle cx="26" cy="40" r="4" fill="currentColor" stroke="none"/>',
+  hinge:'<circle cx="48" cy="16" r="6" fill="currentColor" stroke="none"/><line x1="44" y1="22" x2="20" y2="48"/><line x1="20" y1="48" x2="16" y2="58"/><line x1="20" y1="48" x2="24" y2="58"/><line x1="40" y1="26" x2="38" y2="50"/><circle cx="38" cy="52" r="4" fill="currentColor" stroke="none"/>',
+  pullover:'<line x1="12" y1="40" x2="38" y2="40"/><circle cx="46" cy="40" r="6" fill="currentColor" stroke="none"/><line x1="12" y1="40" x2="14" y2="54"/><line x1="14" y1="54" x2="6" y2="52"/><line x1="38" y1="40" x2="52" y2="24"/><circle cx="54" cy="21" r="4" fill="currentColor" stroke="none"/>',
+  curl:'<circle cx="30" cy="10" r="6" fill="currentColor" stroke="none"/><line x1="30" y1="16" x2="30" y2="36"/><line x1="30" y1="36" x2="24" y2="58"/><line x1="30" y1="36" x2="36" y2="58"/><line x1="30" y1="18" x2="40" y2="30"/><line x1="40" y1="30" x2="34" y2="18"/><circle cx="34" cy="18" r="4" fill="currentColor" stroke="none"/><line x1="30" y1="18" x2="22" y2="34"/>',
+  superman:'<line x1="18" y1="40" x2="46" y2="40"/><circle cx="50" cy="35" r="6" fill="currentColor" stroke="none"/><line x1="46" y1="40" x2="60" y2="28"/><line x1="18" y1="40" x2="6" y2="30"/>',
+  squat:'<circle cx="32" cy="14" r="6" fill="currentColor" stroke="none"/><line x1="32" y1="20" x2="32" y2="38"/><line x1="32" y1="38" x2="22" y2="48"/><line x1="22" y1="48" x2="18" y2="58"/><line x1="32" y1="38" x2="42" y2="48"/><line x1="42" y1="48" x2="46" y2="58"/><line x1="32" y1="22" x2="32" y2="34"/><circle cx="32" cy="34" r="4" fill="currentColor" stroke="none"/>',
+  lunge:'<circle cx="32" cy="12" r="6" fill="currentColor" stroke="none"/><line x1="32" y1="18" x2="32" y2="36"/><line x1="32" y1="36" x2="44" y2="44"/><line x1="44" y1="44" x2="48" y2="58"/><line x1="32" y1="36" x2="22" y2="48"/><line x1="22" y1="48" x2="18" y2="58"/><line x1="32" y1="20" x2="24" y2="34"/><circle cx="24" cy="34" r="4" fill="currentColor" stroke="none"/><line x1="32" y1="20" x2="40" y2="34"/><circle cx="40" cy="34" r="4" fill="currentColor" stroke="none"/>',
+  calfraise:'<circle cx="32" cy="12" r="6" fill="currentColor" stroke="none"/><line x1="32" y1="18" x2="32" y2="42"/><line x1="32" y1="42" x2="28" y2="54"/><line x1="28" y1="54" x2="34" y2="56"/><line x1="32" y1="20" x2="22" y2="32"/><circle cx="22" cy="32" r="4" fill="currentColor" stroke="none"/><line x1="32" y1="20" x2="42" y2="32"/><circle cx="42" cy="32" r="4" fill="currentColor" stroke="none"/>',
+  bridge:'<circle cx="8" cy="46" r="6" fill="currentColor" stroke="none"/><line x1="14" y1="48" x2="30" y2="36"/><line x1="30" y1="36" x2="44" y2="48"/><line x1="44" y1="48" x2="50" y2="54"/>',
+  jumpsquat:'<circle cx="32" cy="10" r="6" fill="currentColor" stroke="none"/><line x1="32" y1="16" x2="32" y2="34"/><line x1="32" y1="34" x2="24" y2="44"/><line x1="32" y1="34" x2="40" y2="44"/><line x1="32" y1="18" x2="24" y2="6"/><line x1="32" y1="18" x2="40" y2="6"/><line x1="20" y1="58" x2="28" y2="58"/><line x1="36" y1="58" x2="44" y2="58"/>',
+  overhead:'<circle cx="32" cy="10" r="6" fill="currentColor" stroke="none"/><line x1="32" y1="16" x2="32" y2="36"/><line x1="32" y1="36" x2="26" y2="58"/><line x1="32" y1="36" x2="38" y2="58"/><line x1="32" y1="18" x2="26" y2="4"/><circle cx="26" cy="4" r="4" fill="currentColor" stroke="none"/><line x1="32" y1="18" x2="38" y2="4"/><circle cx="38" cy="4" r="4" fill="currentColor" stroke="none"/>',
+  raiseSide:'<circle cx="32" cy="12" r="6" fill="currentColor" stroke="none"/><line x1="32" y1="18" x2="32" y2="38"/><line x1="32" y1="38" x2="26" y2="58"/><line x1="32" y1="38" x2="38" y2="58"/><line x1="32" y1="20" x2="52" y2="20"/><circle cx="55" cy="20" r="4" fill="currentColor" stroke="none"/><line x1="32" y1="20" x2="12" y2="20"/><circle cx="9" cy="20" r="4" fill="currentColor" stroke="none"/>',
+  raiseFront:'<circle cx="26" cy="12" r="6" fill="currentColor" stroke="none"/><line x1="26" y1="18" x2="26" y2="38"/><line x1="26" y1="38" x2="20" y2="58"/><line x1="26" y1="38" x2="32" y2="58"/><line x1="26" y1="20" x2="50" y2="10"/><circle cx="53" cy="9" r="4" fill="currentColor" stroke="none"/>',
+  reardelt:'<circle cx="48" cy="16" r="6" fill="currentColor" stroke="none"/><line x1="44" y1="22" x2="20" y2="48"/><line x1="20" y1="48" x2="16" y2="58"/><line x1="20" y1="48" x2="24" y2="58"/><line x1="40" y1="26" x2="52" y2="34"/><circle cx="55" cy="36" r="4" fill="currentColor" stroke="none"/><line x1="40" y1="26" x2="30" y2="18"/><circle cx="27" cy="16" r="4" fill="currentColor" stroke="none"/>',
+  shrug:'<circle cx="32" cy="12" r="6" fill="currentColor" stroke="none"/><line x1="32" y1="18" x2="32" y2="38"/><line x1="32" y1="38" x2="26" y2="58"/><line x1="32" y1="38" x2="38" y2="58"/><line x1="32" y1="19" x2="20" y2="24"/><circle cx="17" cy="26" r="4" fill="currentColor" stroke="none"/><line x1="32" y1="19" x2="44" y2="24"/><circle cx="47" cy="26" r="4" fill="currentColor" stroke="none"/>',
+  thruster:'<circle cx="32" cy="10" r="6" fill="currentColor" stroke="none"/><line x1="32" y1="16" x2="32" y2="34"/><line x1="32" y1="34" x2="22" y2="46"/><line x1="22" y1="46" x2="18" y2="58"/><line x1="32" y1="34" x2="42" y2="46"/><line x1="42" y1="46" x2="46" y2="58"/><line x1="32" y1="18" x2="26" y2="4"/><circle cx="26" cy="4" r="4" fill="currentColor" stroke="none"/><line x1="32" y1="18" x2="38" y2="4"/><circle cx="38" cy="4" r="4" fill="currentColor" stroke="none"/>',
+  burpee:'<line x1="10" y1="44" x2="42" y2="36"/><circle cx="48" cy="34" r="6" fill="currentColor" stroke="none"/><line x1="10" y1="44" x2="6" y2="56"/><line x1="42" y1="36" x2="40" y2="50"/><line x1="40" y1="50" x2="48" y2="56"/><line x1="48" y1="30" x2="54" y2="14"/>',
+  climber:'<line x1="10" y1="44" x2="44" y2="36"/><circle cx="50" cy="34" r="6" fill="currentColor" stroke="none"/><line x1="44" y1="36" x2="42" y2="50"/><line x1="42" y1="50" x2="50" y2="56"/><line x1="10" y1="44" x2="6" y2="58"/><line x1="10" y1="44" x2="24" y2="34"/><line x1="24" y1="34" x2="30" y2="40"/>',
+  swing:'<circle cx="48" cy="16" r="6" fill="currentColor" stroke="none"/><line x1="44" y1="22" x2="24" y2="46"/><line x1="24" y1="46" x2="18" y2="58"/><line x1="24" y1="46" x2="28" y2="58"/><line x1="40" y1="26" x2="58" y2="16"/><circle cx="60" cy="14" r="4" fill="currentColor" stroke="none"/>',
+  plank:'<line x1="10" y1="42" x2="44" y2="42"/><circle cx="50" cy="42" r="6" fill="currentColor" stroke="none"/><line x1="10" y1="42" x2="6" y2="54"/><line x1="44" y1="42" x2="44" y2="50"/><line x1="44" y1="50" x2="34" y2="50"/>',
+  pullup:'<line x1="10" y1="8" x2="54" y2="8"/><line x1="20" y1="8" x2="20" y2="16"/><line x1="44" y1="8" x2="44" y2="16"/><circle cx="32" cy="24" r="6" fill="currentColor" stroke="none"/><line x1="32" y1="30" x2="32" y2="44"/><line x1="32" y1="44" x2="26" y2="58"/><line x1="32" y1="44" x2="38" y2="58"/><line x1="20" y1="16" x2="27" y2="24"/><line x1="44" y1="16" x2="37" y2="24"/>',
+  jumprope:'<circle cx="32" cy="10" r="6" fill="currentColor" stroke="none"/><line x1="32" y1="16" x2="32" y2="36"/><line x1="32" y1="36" x2="26" y2="52"/><line x1="32" y1="36" x2="38" y2="52"/><path d="M20 20 C20 44,44 44,44 20"/><line x1="20" y1="58" x2="44" y2="58"/>',
+  carry:'<circle cx="32" cy="10" r="6" fill="currentColor" stroke="none"/><line x1="32" y1="16" x2="32" y2="38"/><line x1="32" y1="38" x2="26" y2="48"/><line x1="26" y1="48" x2="30" y2="58"/><line x1="32" y1="38" x2="38" y2="48"/><line x1="38" y1="48" x2="34" y2="58"/><line x1="32" y1="18" x2="22" y2="34"/><circle cx="22" cy="36" r="4" fill="currentColor" stroke="none"/><line x1="32" y1="18" x2="42" y2="34"/><circle cx="42" cy="36" r="4" fill="currentColor" stroke="none"/>',
+  generic:'<circle cx="32" cy="14" r="6" fill="currentColor" stroke="none"/><line x1="32" y1="20" x2="32" y2="40"/><line x1="32" y1="40" x2="24" y2="58"/><line x1="32" y1="40" x2="40" y2="58"/><line x1="32" y1="22" x2="20" y2="34"/><line x1="32" y1="22" x2="44" y2="34"/>',
+};
+function exIcon(key,size){
+  return `<svg class="exicon" width="${size||28}" height="${size||28}" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">${EX_ICONS[key]||EX_ICONS.generic}</svg>`;
+}
+
 const PLAN={
   1:{title:'อก + หลังแขน',tag:'Push',ex:[
-    {id:'d1a',n:'Dumbbell Floor Press',th:'นอนพื้นดันดัมเบล',s:4,r:'8-12',t:'db'},
-    {id:'d1b',n:'Incline DB Press',th:'ดันอกเอียง',s:3,r:'10-12',t:'db'},
-    {id:'d1c',n:'Push-ups',th:'วิดพื้น',s:3,r:'สุดแรง',t:'bw'},
-    {id:'d1d',n:'DB Chest Fly',th:'บินอก',s:3,r:'12-15',t:'db'},
-    {id:'d1e',n:'Overhead Tri Extension',th:'เหยียดหลังแขนเหนือหัว',s:3,r:'12',t:'db'},
-    {id:'d1f',n:'Bench Dips',th:'จุ่มหลังแขน',s:3,r:'12-15',t:'bw'},
-    {id:'d1g',n:'Push-up Burnout',th:'วิดพื้นปิดท้าย',s:2,r:'สุดแรง',t:'bw'},
+    {id:'d1a',n:'Dumbbell Floor Press',th:'นอนพื้นดันดัมเบล',s:4,r:'8-12',t:'db',eq:['db','mat'],pic:'pressLying',tips:[
+      'นอนหงายบนพื้นหรือเสื่อ ชันเข่า วางเท้าราบ',
+      'ดันดัมเบลขึ้นจนแขนเหยียดเกือบสุด ล็อกข้อมือให้ตรง',
+      'ควบคุมจังหวะลง ให้ต้นแขนแตะพื้นเบาๆ ไม่กระแทก',
+    ]},
+    {id:'d1b',n:'Incline DB Press',th:'ดันอกเอียง',s:3,r:'10-12',t:'db',eq:['db','bench'],pic:'pressLying',tips:[
+      'ปรับม้านั่งทำมุม 30-45 องศา ไม่ควรชันเกินไปจะเน้นไหล่มากกว่าอก',
+      'วางสะบักแนบม้านั่ง อกเปิด ไม่ยกไหล่ขึ้นหูขณะดัน',
+      'ดันดัมเบลขึ้นเป็นแนวเฉียงเข้าหากึ่งกลางลำตัว',
+    ]},
+    {id:'d1c',n:'Push-ups',th:'วิดพื้น',s:3,r:'สุดแรง',t:'bw',eq:['mat'],pic:'pushup',tips:[
+      'มือกว้างกว่าหัวไหล่เล็กน้อย ลำตัวเป็นเส้นตรงจากหัวถึงส้นเท้า',
+      'เกร็งแกนกลางลำตัว ไม่ให้สะโพกตกหรือยกก้นสูง',
+      'ลงจนอกเกือบแตะพื้น ศอกทำมุมประมาณ 45 องศากับลำตัว',
+    ]},
+    {id:'d1d',n:'DB Chest Fly',th:'บินอก',s:3,r:'12-15',t:'db',eq:['db','bench'],pic:'fly',tips:[
+      'นอนบนม้านั่งหรือพื้น ดัมเบลอยู่เหนืออก ศอกงอเล็กน้อยคงที่ตลอดท่า',
+      'กางแขนลงด้านข้างช้าๆ จนรู้สึกยืดที่หน้าอก อย่าลงลึกจนไหล่บาด',
+      'บีบอกดึงดัมเบลกลับมาจุดเริ่มต้นแบบโค้งวงกลม ไม่ใช่ดันตรงขึ้นแบบเบนช์เพรส',
+    ]},
+    {id:'d1e',n:'Overhead Tri Extension',th:'เหยียดหลังแขนเหนือหัว',s:3,r:'12',t:'db',eq:['db'],pic:'tricep',tips:[
+      'ยืนหรือนั่ง ถือดัมเบลด้วยสองมือเหนือศีรษะ ศอกชี้ไปข้างหน้าแนบหู',
+      'งอศอกหย่อนดัมเบลลงด้านหลังศีรษะ ต้นแขนนิ่งไม่กางออก',
+      'เหยียดแขนกลับขึ้นเต็มที่โดยไม่ล็อกศอกแรงเกิน',
+    ]},
+    {id:'d1f',n:'Bench Dips',th:'จุ่มหลังแขน',s:3,r:'12-15',t:'bw',eq:['bench'],pic:'dip',tips:[
+      'มือวางขอบม้านั่ง นิ้วชี้ไปข้างหน้า ก้นเลื่อนออกมาหน้าม้านั่ง',
+      'งอศอกลดตัวลงจนต้นแขนขนานพื้น ศอกชี้ไปด้านหลังไม่กางออกข้าง',
+      'ดันตัวขึ้นด้วยหลังแขน ไม่ใช่โยกตัวด้วยขา',
+    ]},
+    {id:'d1g',n:'Push-up Burnout',th:'วิดพื้นปิดท้าย',s:2,r:'สุดแรง',t:'bw',eq:['mat'],pic:'pushup',tips:[
+      'ทำจนสุดแรงด้วยฟอร์มเดียวกับ Push-ups ปกติ',
+      'หากทำท่าปกติไม่ไหว ให้ลดระดับเป็นวิดพื้นแบบชันเข่าแทนการปล่อยให้ฟอร์มเสีย',
+    ]},
+    {id:'d1h',n:'Resistance Band Chest Press',th:'ดันอกด้วยยางยืด',s:3,r:'15-20',t:'bw',eq:['band'],pic:'pressForward',extra:true,tips:[
+      'ยืนเหยียบยางยืดหรือผูกไว้ด้านหลัง ยืนแยกเท้าเพื่อความมั่นคง',
+      'ดันมือทั้งสองไปข้างหน้าระดับอก จนแขนเกือบเหยียดสุด แล้วควบคุมกลับช้าๆ',
+    ]},
+    {id:'d1i',n:'Kettlebell Floor Press',th:'นอนพื้นดันเคทเทิลเบล',s:3,r:'10-12',t:'db',eq:['kb','mat'],pic:'pressLying',extra:true,tips:[
+      'นอนหงายชันเข่า ถือเคทเทิลเบลข้างเดียวหรือสองข้างระดับอก',
+      'ดันขึ้นตรงจนแขนเกือบเหยียดสุด ควบคุมจังหวะลงให้ต้นแขนแตะพื้นเบาๆ',
+    ]},
   ]},
   2:{title:'หลัง + หน้าแขน',tag:'Pull',ex:[
-    {id:'d2a',n:'One-Arm DB Row',th:'โยกแถวมือเดียว',s:4,r:'10-12',t:'db'},
-    {id:'d2b',n:'Bent-over DB Row',th:'โยกแถวสองมือ',s:3,r:'10',t:'db'},
-    {id:'d2c',n:'DB Romanian Deadlift',th:'RDL โน้มตัวหลังตรง',s:3,r:'10-12',t:'db'},
-    {id:'d2d',n:'DB Pullover',th:'พูลโอเวอร์',s:3,r:'12',t:'db'},
-    {id:'d2e',n:'Bicep Curl',th:'เคิร์ลหน้าแขน',s:3,r:'12',t:'db'},
-    {id:'d2f',n:'Hammer Curl',th:'แฮมเมอร์เคิร์ล',s:3,r:'12',t:'db'},
-    {id:'d2g',n:'Superman',th:'ซุปเปอร์แมน (หลังล่าง)',s:3,r:'15',t:'bw'},
+    {id:'d2a',n:'One-Arm DB Row',th:'โยกแถวมือเดียว',s:4,r:'10-12',t:'db',eq:['db','bench'],pic:'row',tips:[
+      'มือและเข่าข้างหนึ่งวางบนม้านั่ง หลังขนานพื้น ไม่บิดลำตัว',
+      'ดึงดัมเบลขึ้นชิดลำตัวโดยนำด้วยศอก ไม่ใช่นำด้วยมือ',
+      'บีบสะบักตอนดึงขึ้นสุด แล้วปล่อยลงช้าๆ ควบคุมน้ำหนัก',
+    ]},
+    {id:'d2b',n:'Bent-over DB Row',th:'โยกแถวสองมือ',s:3,r:'10',t:'db',eq:['db'],pic:'row',tips:[
+      'ก้มตัวจากสะโพก หลังตรงตลอดท่า เข่างอเล็กน้อย',
+      'ดึงดัมเบลทั้งสองข้างขึ้นชิดลำตัว บีบสะบักเข้าหากัน',
+      'ระวังอย่าใช้แรงเหวี่ยงหลังหรือแอ่นหลังช่วยดึง',
+    ]},
+    {id:'d2c',n:'DB Romanian Deadlift',th:'RDL โน้มตัวหลังตรง',s:3,r:'10-12',t:'db',eq:['db'],pic:'hinge',tips:RDL_TIPS},
+    {id:'d2d',n:'DB Pullover',th:'พูลโอเวอร์',s:3,r:'12',t:'db',eq:['db','bench'],pic:'pullover',tips:[
+      'นอนหงายบนม้านั่ง (หรือพื้น) ถือดัมเบลด้วยสองมือเหนืออก',
+      'หย่อนดัมเบลลงเหนือศีรษะแบบโค้งเป็นแนวโค้ง ศอกงอเล็กน้อยคงที่',
+      'ดึงกลับมาเหนืออกโดยใช้แรงจากปีกและอก ไม่ใช่แขน',
+    ]},
+    {id:'d2e',n:'Bicep Curl',th:'เคิร์ลหน้าแขน',s:3,r:'12',t:'db',eq:['db'],pic:'curl',tips:CURL_TIPS},
+    {id:'d2f',n:'Hammer Curl',th:'แฮมเมอร์เคิร์ล',s:3,r:'12',t:'db',eq:['db'],pic:'curl',tips:[
+      'จับดัมเบลแนวตั้ง (ฝ่ามือหันเข้าหาลำตัว) ตลอดท่า',
+      'ศอกแนบลำตัว เคิร์ลขึ้นตรงๆ ไม่บิดข้อมือ',
+    ]},
+    {id:'d2g',n:'Superman',th:'ซุปเปอร์แมน (หลังล่าง)',s:3,r:'15',t:'bw',eq:['mat'],pic:'superman',tips:[
+      'นอนคว่ำ เหยียดแขนไปข้างหน้า ขาเหยียดตรง',
+      'ยกแขนและขาขึ้นพร้อมกันเบาๆ เกร็งหลังล่างและก้น ค้างไว้สั้นๆ',
+      'อย่าเงยคอแรงเกินไป ให้มองพื้นเฉียงๆ',
+    ]},
+    {id:'d2h',n:'Pull-up',th:'ดึงข้อ',s:3,r:'สุดแรงหรือ 5-10',t:'bw',eq:['pullup'],pic:'pullup',extra:true,tips:[
+      'จับบาร์กว้างกว่าไหล่เล็กน้อย ห้อยตัวแขนเหยียดสุด',
+      'ดึงตัวขึ้นจนคางพ้นบาร์ บีบสะบักระหว่างดึง แล้วลดตัวลงช้าๆ ควบคุม',
+    ]},
+    {id:'d2i',n:'Band Lat Pulldown',th:'ดึงยางยืดเหนือหัว',s:3,r:'15',t:'bw',eq:['band'],pic:'row',extra:true,tips:[
+      'ผูกยางยืดไว้เหนือศีรษะ นั่งหรือคุกเข่า ดึงมือทั้งสองลงมาระดับอก',
+      'บีบสะบักตอนดึงลงสุด ควบคุมจังหวะปล่อยกลับ',
+    ]},
   ]},
   3:{title:'ขา + ก้น',tag:'Legs',ex:[
-    {id:'d3a',n:'Goblet Squat',th:'สควอทอุ้มดัมเบล',s:4,r:'10-12',t:'db'},
-    {id:'d3b',n:'Bulgarian Split Squat',th:'สปลิทสควอท /ข้าง',s:3,r:'10',t:'db'},
-    {id:'d3c',n:'DB Romanian Deadlift',th:'RDL',s:3,r:'12',t:'db'},
-    {id:'d3d',n:'Walking Lunges',th:'เดินย่อ /ข้าง',s:3,r:'12',t:'db'},
-    {id:'d3e',n:'Calf Raise',th:'เขย่งน่อง',s:4,r:'15-20',t:'db'},
-    {id:'d3f',n:'Glute Bridge',th:'สะพานก้น',s:3,r:'15',t:'db'},
-    {id:'d3g',n:'Jump Squat',th:'สควอทกระโดด',s:3,r:'15',t:'bw'},
+    {id:'d3a',n:'Goblet Squat',th:'สควอทอุ้มดัมเบล',s:4,r:'10-12',t:'db',eq:['db'],pic:'squat',tips:[
+      'อุ้มดัมเบลแนบอกด้วยสองมือ เท้ากว้างกว่าไหล่เล็กน้อย ปลายเท้าแยกออกเล็กน้อย',
+      'ย่อตัวลงโดยดันสะโพกไปด้านหลัง เข่าไปทางเดียวกับปลายเท้า หลังตรง',
+      'ลงจนต้นขาขนานพื้นหรือลึกกว่าเท่าที่ทำได้โดยส้นเท้าไม่ลอย',
+    ]},
+    {id:'d3b',n:'Bulgarian Split Squat',th:'สปลิทสควอท /ข้าง',s:3,r:'10',t:'db',eq:['db','bench','box'],pic:'lunge',tips:[
+      'วางหลังเท้าข้างหนึ่งบนม้านั่งหรือกล่องด้านหลัง ขาหน้าก้าวออกให้พอดี',
+      'ย่อตัวลงตรงๆ เข่าหลังลงใกล้พื้น น้ำหนักอยู่ที่ขาหน้าเป็นหลัก',
+      'ลำตัวตั้งตรงหรือเอนเล็กน้อย ไม่ให้เข่าหน้าล้ำปลายเท้ามากเกินไป',
+    ]},
+    {id:'d3c',n:'DB Romanian Deadlift',th:'RDL',s:3,r:'12',t:'db',eq:['db'],pic:'hinge',tips:RDL_TIPS},
+    {id:'d3d',n:'Walking Lunges',th:'เดินย่อ /ข้าง',s:3,r:'12',t:'db',eq:['db'],pic:'lunge',tips:[
+      'ถือดัมเบลข้างลำตัว ก้าวยาวไปข้างหน้า ลดตัวลงจนเข่าหลังเกือบแตะพื้น',
+      'เข่าหน้าอยู่แนวเดียวกับข้อเท้า ลำตัวตั้งตรง',
+      'ดันพื้นด้วยขาหน้าก้าวต่อไปข้างหน้าสลับขา',
+    ]},
+    {id:'d3e',n:'Calf Raise',th:'เขย่งน่อง',s:4,r:'15-20',t:'db',eq:['db','box'],pic:'calfraise',tips:[
+      'ยืนตรง ถือดัมเบล (หรือยืนขอบกล่องเพื่อเพิ่มช่วงการเคลื่อนไหว)',
+      'เขย่งปลายเท้าขึ้นสูงสุด ค้างบีบน่องสั้นๆ แล้วลดลงช้าๆ จนส้นเท้าต่ำกว่าปลายเท้า',
+    ]},
+    {id:'d3f',n:'Glute Bridge',th:'สะพานก้น',s:3,r:'15',t:'db',eq:['mat'],pic:'bridge',tips:[
+      'นอนหงาย ชันเข่า เท้าราบห่างสะโพกพอประมาณ',
+      'ดันสะโพกขึ้นจนลำตัวเป็นเส้นตรงจากไหล่ถึงเข่า บีบก้นค้างไว้',
+      'อย่าแอ่นหลังส่วนล่างมากเกินไป',
+    ]},
+    {id:'d3g',n:'Jump Squat',th:'สควอทกระโดด',s:3,r:'15',t:'bw',eq:[],pic:'jumpsquat',tips:[
+      'สควอทลงตามฟอร์มปกติแล้วกระโดดขึ้นแรงๆ แกว่งแขนช่วย',
+      'ลงพื้นด้วยปลายเท้าก่อนแล้วย่อเข่ารับแรงกระแทกทันที',
+    ]},
+    {id:'d3h',n:'Barbell Back Squat',th:'สควอทบาร์เบล',s:4,r:'8-10',t:'db',eq:['barbell','rack'],pic:'squat',extra:true,tips:[
+      'วางบาร์บนบ่าส่วนบน (ไม่ใช่คอ) เท้ากว้างเท่าไหล่ ปลดบาร์ออกจากแร็คแล้วถอยยืน',
+      'ย่อสควอทลงหลังตรง เข่าไปทางเดียวกับปลายเท้า แล้วดันพื้นยืนขึ้น',
+    ]},
+    {id:'d3i',n:'Box Step-up',th:'ก้าวขึ้นกล่อง /ข้าง',s:3,r:'10-12',t:'db',eq:['box'],pic:'lunge',extra:true,tips:[
+      'ก้าวเท้าข้างหนึ่งขึ้นเต็มฝ่าเท้าบนกล่อง ดันพื้นด้วยขานั้นจนยืนตรงบนกล่อง',
+      'ควบคุมจังหวะก้าวลงช้าๆ สลับข้าง อาจถือดัมเบลเพิ่มแรงต้าน',
+    ]},
   ]},
   4:{title:'ไหล่ + แขน',tag:'Shoulders',ex:[
-    {id:'d4a',n:'DB Overhead Press',th:'ดันไหล่เหนือหัว',s:4,r:'8-12',t:'db'},
-    {id:'d4b',n:'Lateral Raise',th:'กางข้าง',s:3,r:'12-15',t:'db'},
-    {id:'d4c',n:'Front Raise',th:'ยกหน้า',s:3,r:'12',t:'db'},
-    {id:'d4d',n:'Rear Delt Fly',th:'หลังไหล่',s:3,r:'15',t:'db'},
-    {id:'d4e',n:'Bicep Curl',th:'เคิร์ลหน้าแขน',s:3,r:'12',t:'db'},
-    {id:'d4f',n:'Triceps Kickback',th:'คิกแบ็ก',s:3,r:'12',t:'db'},
-    {id:'d4g',n:'Shrugs',th:'ยักไหล่',s:3,r:'15',t:'db'},
+    {id:'d4a',n:'DB Overhead Press',th:'ดันไหล่เหนือหัว',s:4,r:'8-12',t:'db',eq:['db'],pic:'overhead',tips:[
+      'ยืนหรือนั่ง ดัมเบลอยู่ระดับไหล่ ฝ่ามือหันไปด้านหน้า',
+      'ดันขึ้นตรงเหนือศีรษะ ไม่แอ่นหลังช่วยดัน เกร็งแกนกลางลำตัว',
+      'ลดลงควบคุมจนศอกอยู่ระดับหรือต่ำกว่าไหล่เล็กน้อย',
+    ]},
+    {id:'d4b',n:'Lateral Raise',th:'กางข้าง',s:3,r:'12-15',t:'db',eq:['db'],pic:'raiseSide',tips:[
+      'ยืนตรง ดัมเบลข้างลำตัว ศอกงอเล็กน้อยคงที่',
+      'ยกแขนกางออกด้านข้างจนถึงระดับไหล่ ไม่ยกสูงเกินไหล่หรือเหวี่ยงตัวช่วย',
+      'ลดลงช้าๆ ควบคุมน้ำหนัก',
+    ]},
+    {id:'d4c',n:'Front Raise',th:'ยกหน้า',s:3,r:'12',t:'db',eq:['db'],pic:'raiseFront',tips:[
+      'ยืนตรง ยกดัมเบลไปด้านหน้าจนถึงระดับไหล่ ศอกเหยียดเกือบตรง',
+      'ไม่แกว่งตัวหรือใช้แรงหลังช่วยยก',
+    ]},
+    {id:'d4d',n:'Rear Delt Fly',th:'หลังไหล่',s:3,r:'15',t:'db',eq:['db','bench'],pic:'reardelt',tips:[
+      'ก้มตัวไปข้างหน้าจากสะโพก หลังตรง ดัมเบลห้อยลงหน้าลำตัว',
+      'กางแขนออกด้านข้างจนสะบักบีบเข้าหากัน ศอกงอเล็กน้อย',
+      'เน้นใช้กล้ามเนื้อหลังไหล่ดึง ไม่ใช้แรงเหวี่ยง',
+    ]},
+    {id:'d4e',n:'Bicep Curl',th:'เคิร์ลหน้าแขน',s:3,r:'12',t:'db',eq:['db'],pic:'curl',tips:CURL_TIPS},
+    {id:'d4f',n:'Triceps Kickback',th:'คิกแบ็ก',s:3,r:'12',t:'db',eq:['db','bench'],pic:'tricep',tips:[
+      'ก้มตัว มือหนึ่งท้าวม้านั่ง หลังตรงขนานพื้น ต้นแขนแนบลำตัวขนานพื้น',
+      'เหยียดศอกไปด้านหลังจนแขนตรง บีบหลังแขนค้างสั้นๆ',
+      'ต้นแขนนิ่ง ขยับเฉพาะช่วงศอกลงมา',
+    ]},
+    {id:'d4g',n:'Shrugs',th:'ยักไหล่',s:3,r:'15',t:'db',eq:['db'],pic:'shrug',tips:[
+      'ยืนตรง ถือดัมเบลข้างลำตัว แขนเหยียดตรง',
+      'ยักไหล่ขึ้นตรงๆ เข้าหาหู ไม่หมุนไหล่เป็นวงกลม',
+      'ค้างบีบสั้นๆ แล้วลดลงช้าๆ',
+    ]},
+    {id:'d4h',n:'Band Lateral Raise',th:'กางข้างด้วยยางยืด',s:3,r:'15-20',t:'bw',eq:['band'],pic:'raiseSide',extra:true,tips:[
+      'เหยียบยางยืดด้วยเท้าทั้งสอง จับปลายยางยืดข้างลำตัว',
+      'ยกแขนกางออกด้านข้างจนถึงระดับไหล่ ควบคุมจังหวะกลับ',
+    ]},
+    {id:'d4i',n:'Pike Push-up',th:'วิดพื้นท่าไพค์ (เน้นไหล่)',s:3,r:'8-12',t:'bw',eq:['mat'],pic:'pushup',extra:true,tips:[
+      'ท่าเริ่มคล้ายวิดพื้นแต่ยกสะโพกขึ้นสูงให้ลำตัวเป็นรูปตัว V',
+      'งอศอกลดศีรษะลงหาพื้นระหว่างมือ แล้วดันขึ้นกลับที่เดิม',
+    ]},
   ]},
   5:{title:'Full Body + เผาไขมัน',tag:'Conditioning',ex:[
-    {id:'d5a',n:'DB Thruster',th:'ทรัสเตอร์ สควอท+ดัน',s:4,r:'12',t:'db'},
-    {id:'d5b',n:'Renegade Row',th:'เรเนเกดโรว์',s:3,r:'10',t:'db'},
-    {id:'d5c',n:'DB Deadlift',th:'เดดลิฟต์',s:3,r:'12',t:'db'},
-    {id:'d5d',n:'Burpees',th:'เบอร์ปี้',s:3,r:'12',t:'bw'},
-    {id:'d5e',n:'Mountain Climbers',th:'ไต่เขา',s:3,r:'30',t:'time'},
-    {id:'d5f',n:'DB Swing',th:'สวิงสะโพก',s:3,r:'15',t:'db'},
-    {id:'d5g',n:'Plank',th:'แพลงก์',s:3,r:'45-60',t:'time'},
+    {id:'d5a',n:'DB Thruster',th:'ทรัสเตอร์ สควอท+ดัน',s:4,r:'12',t:'db',eq:['db'],pic:'thruster',tips:[
+      'ถือดัมเบลระดับไหล่ ย่อสควอทลงแล้วยืนขึ้นพร้อมดันดัมเบลขึ้นเหนือศีรษะเป็นจังหวะต่อเนื่อง',
+      'ใช้แรงส่งจากขาช่วยดันแขน ไม่ใช้แรงแขนอย่างเดียว',
+    ]},
+    {id:'d5b',n:'Renegade Row',th:'เรเนเกดโรว์',s:3,r:'10',t:'db',eq:['db','mat'],pic:'row',tips:[
+      'อยู่ในท่าแพลงก์มือถือดัมเบลสองข้าง เท้าแยกกว้างเพื่อความมั่นคง',
+      'ดึงดัมเบลข้างหนึ่งขึ้นชิดลำตัวโดยสะโพกไม่บิดหรือยกสูง',
+      'สลับข้างโดยรักษาลำตัวให้นิ่งตลอด',
+    ]},
+    {id:'d5c',n:'DB Deadlift',th:'เดดลิฟต์',s:3,r:'12',t:'db',eq:['db'],pic:'hinge',tips:[
+      'ยืนแยกเท้าประมาณสะโพก ดัมเบลอยู่หน้าต้นขา หลังตรง',
+      'ดันสะโพกไปด้านหลัง ย่อเข่าเล็กน้อยจนดัมเบลลงถึงหน้าแข้ง',
+      'ยืนขึ้นด้วยการดันสะโพกไปด้านหน้า ไม่ใช้หลังดึงขึ้น',
+    ]},
+    {id:'d5d',n:'Burpees',th:'เบอร์ปี้',s:3,r:'12',t:'bw',eq:['mat'],pic:'burpee',tips:[
+      'ย่อตัวลงมือแตะพื้น กระโดดขาถอยไปเป็นท่าแพลงก์',
+      'วิดพื้นหนึ่งครั้ง (หรือข้าม) แล้วกระโดดขาเข้ามาและกระโดดขึ้นสุดตัว',
+      'ควบคุมจังหวะลงพื้นให้เข่าไม่กระแทกแรง',
+    ]},
+    {id:'d5e',n:'Mountain Climbers',th:'ไต่เขา',s:3,r:'30',t:'time',eq:['mat'],pic:'climber',tips:[
+      'อยู่ในท่าแพลงก์แขนตรง สลับดึงเข่าเข้าหาอกเร็วๆ',
+      'สะโพกอยู่ระดับเดียวกับไหล่ตลอด ไม่ยกก้นสูง',
+    ]},
+    {id:'d5f',n:'DB Swing',th:'สวิงสะโพก',s:3,r:'15',t:'db',eq:['db','kb'],pic:'swing',tips:[
+      'ยืนแยกเท้ากว้างกว่าไหล่เล็กน้อย ถือดัมเบลด้วยสองมือ',
+      'ดันสะโพกไปด้านหลังแกว่งดัมเบลระหว่างขา แล้วดันสะโพกไปข้างหน้าแรงๆ ส่งดัมเบลขึ้นระดับไหล่',
+      'ใช้แรงจากสะโพก ไม่ใช่ยกด้วยแขนหรือหลัง',
+    ]},
+    {id:'d5g',n:'Plank',th:'แพลงก์',s:3,r:'45-60',t:'time',eq:['mat'],pic:'plank',tips:[
+      'วางศอกใต้ไหล่พอดี ลำตัวเป็นเส้นตรงจากหัวถึงส้นเท้า',
+      'เกร็งหน้าท้องและก้น ไม่ยกก้นสูงหรือปล่อยสะโพกตก',
+      'หายใจปกติตลอดการค้างท่า',
+    ]},
+    {id:'d5h',n:'Jump Rope',th:'กระโดดเชือก',s:3,r:'60',t:'time',eq:['rope'],pic:'jumprope',extra:true,tips:[
+      'ยืนตัวตรง ข้อศอกแนบลำตัว หมุนเชือกด้วยข้อมือเป็นหลัก',
+      'กระโดดเบาๆ ด้วยปลายเท้า เข่างอเล็กน้อยรับแรงกระแทก',
+    ]},
+    {id:'d5i',n:"Farmer's Carry",th:'เดินถือน้ำหนัก',s:3,r:'20 ก้าว',t:'db',eq:['db'],pic:'carry',extra:true,tips:[
+      'ถือดัมเบล/เคทเทิลเบลข้างลำตัวทั้งสองมือ ยืนตัวตรง ไหล่ผึ่ง',
+      'เดินก้าวสั้นๆ ควบคุม ไม่โยกลำตัวหรือเอียงข้าง',
+    ]},
   ]},
 };
 const EX_BY_ID={};for(const d in PLAN)PLAN[d].ex.forEach(e=>EX_BY_ID[e.id]={...e,day:+d});
+function eqName(id){const e=EQUIPMENT_LIST.find(x=>x.id===id);return e?e.n:id}
 
-let state={view:'workout',day:1,data:{logs:{},nutrition:{goals:{cal:2000,protein:150,carb:200,fat:65},logs:{}}}};
+const AVATAR_EMOJIS=['🦣','💪','🔥','⚡','🐯','🦁','🥊','🏋️','🐺','🚀'];
+let root=null;
+let state={view:'workout',day:1,data:null};
+
+function defaultUserData(){return {logs:{},nutrition:{goals:{cal:2000,protein:150,carb:200,fat:65},logs:{}},equipment:{}}}
+function migrateOldData(){
+  try{
+    const raw=localStorage.getItem(OLD_STORE_KEY);if(!raw)return null;
+    const d=JSON.parse(raw);if(!d)return null;
+    return {
+      logs:d.logs||{},
+      nutrition:{
+        goals:{cal:2000,protein:150,carb:200,fat:65,...((d.nutrition&&d.nutrition.goals)||{})},
+        logs:(d.nutrition&&d.nutrition.logs)||{},
+      },
+      equipment:{},
+    };
+  }catch(e){return null}
+}
 
 function tkey(){const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
 function dkey(d){return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
@@ -293,22 +628,85 @@ function volume(entry,type){if(!entry)return 0;return entry.sets.reduce((s,st)=>
 function sumSetStr(entry,type){if(!entry||!entry.sets.length)return '';const done=entry.sets.filter(s=>s.done||s.r);if(!done.length)return '';if(type==='db'){const w=done[0].w||'?';const reps=done.map(s=>s.r||'0').join(',');return `${w} กก. × ${reps}`}return done.map(s=>s.r||'0').join(', ')+(type==='time'?' วิ':' ครั้ง')}
 
 let saveTimer=null;
+function persistRoot(){try{localStorage.setItem(STORE_KEY,JSON.stringify(root))}catch(e){console.error('save failed',e)}}
 function save(){
-  try{localStorage.setItem(STORE_KEY,JSON.stringify(state.data));
-    const n=document.getElementById('savenote');n.classList.add('show');clearTimeout(n._t);n._t=setTimeout(()=>n.classList.remove('show'),1300);
-  }catch(e){console.error('save failed',e)}
+  persistRoot();
+  const n=document.getElementById('savenote');n.classList.add('show');clearTimeout(n._t);n._t=setTimeout(()=>n.classList.remove('show'),1300);
 }
 function scheduleSave(){clearTimeout(saveTimer);saveTimer=setTimeout(save,500)}
 function load(){
-  try{const v=localStorage.getItem(STORE_KEY);if(v){const d=JSON.parse(v);if(d&&d.logs){
-    state.data.logs=d.logs;
-    if(d.nutrition){
-      state.data.nutrition.goals={...state.data.nutrition.goals,...(d.nutrition.goals||{})};
-      state.data.nutrition.logs=d.nutrition.logs||{};
+  try{
+    const raw=localStorage.getItem(STORE_KEY);
+    if(raw){
+      const d=JSON.parse(raw);
+      if(d&&Array.isArray(d.users)&&d.users.length){
+        root=d;
+        root.data=root.data||{};
+        root.users.forEach(u=>{root.data[u.id]=root.data[u.id]||defaultUserData();root.data[u.id].equipment=root.data[u.id].equipment||{}});
+        if(!root.data[root.activeId])root.activeId=root.users[0].id;
+        state.data=root.data[root.activeId];
+        return;
+      }
     }
-  }}}
-  catch(e){/* first run */}
+  }catch(e){/* fall through to fresh/migrated setup */}
+  const migrated=migrateOldData();
+  const uid='u'+Date.now();
+  root={users:[{id:uid,name:'ฉัน',emoji:AVATAR_EMOJIS[0]}],activeId:uid,data:{[uid]:migrated||defaultUserData()}};
+  state.data=root.data[uid];
+  persistRoot();
 }
+
+function activeUser(){return root.users.find(u=>u.id===root.activeId)}
+function addUser(name){
+  name=(name||'').trim();if(!name)return;
+  const id='u'+Date.now()+Math.random().toString(36).slice(2,5);
+  root.users.push({id,name,emoji:AVATAR_EMOJIS[root.users.length%AVATAR_EMOJIS.length]});
+  root.data[id]=defaultUserData();
+  root.activeId=id;state.data=root.data[id];
+  persistRoot();fullRerender();
+}
+function switchUser(id){
+  if(id===root.activeId)return;
+  root.activeId=id;state.data=root.data[id];
+  persistRoot();fullRerender();
+}
+function deleteUser(id){
+  if(root.users.length<=1)return;
+  root.users=root.users.filter(u=>u.id!==id);
+  delete root.data[id];
+  if(root.activeId===id){root.activeId=root.users[0].id;state.data=root.data[root.activeId]}
+  persistRoot();fullRerender();
+}
+function fullRerender(){
+  document.getElementById('streakN').textContent=streak();
+  renderProfileBar();renderRail();renderDay();
+  if(state.view==='history')renderHistory();
+  if(state.view==='dashboard')renderDashboard();
+  if(state.view==='nutrition')renderNutrition();
+  if(state.view==='guide')renderGuide();
+}
+function renderProfileBar(){
+  const u=activeUser();
+  document.getElementById('pAvatar').textContent=u.emoji;
+  document.getElementById('pName').textContent=u.name;
+}
+function renderUserList(){
+  const list=document.getElementById('userList');list.innerHTML='';
+  root.users.forEach(u=>{
+    const row=document.createElement('div');
+    row.className='urow'+(u.id===root.activeId?' active':'');
+    row.innerHTML=`<div class="pavatar">${u.emoji}</div><div class="un"><b>${escapeHtml(u.name)}</b><span>${u.id===root.activeId?'กำลังใช้งาน':'แตะเพื่อเปลี่ยน'}</span></div>${root.users.length>1?'<div class="udel">✕</div>':''}`;
+    row.addEventListener('click',e=>{if(e.target.closest('.udel'))return;switchUser(u.id);closeProfileModal()});
+    const del=row.querySelector('.udel');
+    if(del)del.addEventListener('click',e=>{
+      e.stopPropagation();
+      if(confirm(`ลบผู้ใช้ "${u.name}"? ข้อมูลการออกกำลังกายและโภชนาการทั้งหมดของคนนี้จะหายไป`)){deleteUser(u.id);renderUserList()}
+    });
+    list.appendChild(row);
+  });
+}
+function openProfileModal(){renderUserList();document.getElementById('profileOverlay').classList.add('show')}
+function closeProfileModal(){document.getElementById('profileOverlay').classList.remove('show')}
 
 function streak(){
   const dates=new Set();
@@ -362,13 +760,63 @@ function setView(v){
   document.getElementById('tabDash').classList.toggle('on',v==='dashboard');
   document.getElementById('tabNutri').classList.toggle('on',v==='nutrition');
   document.getElementById('tabHist').classList.toggle('on',v==='history');
+  document.getElementById('tabGuide').classList.toggle('on',v==='guide');
   document.getElementById('workoutView').style.display=v==='workout'?'':'none';
   document.getElementById('dashboardView').style.display=v==='dashboard'?'':'none';
   document.getElementById('nutritionView').style.display=v==='nutrition'?'':'none';
   document.getElementById('historyView').style.display=v==='history'?'':'none';
+  document.getElementById('guideView').style.display=v==='guide'?'':'none';
   if(v==='history')renderHistory();
   if(v==='dashboard')renderDashboard();
   if(v==='nutrition')renderNutrition();
+  if(v==='guide')renderGuide();
+}
+
+function renderGuide(){
+  const v=document.getElementById('guideView');
+  const eq=state.data.equipment||(state.data.equipment={});
+  const eqRows=EQUIPMENT_LIST.map(it=>{
+    const on=!!eq[it.id];
+    return `<div class="eqrow"><span class="en">${it.n}</span><div class="chk ${on?'on':''}" data-id="${it.id}">${on?chkIcon():''}</div></div>`;
+  }).join('');
+
+  const groups=[1,2,3,4,5].map(d=>{
+    const p=PLAN[d];
+    const items=p.ex.map(ex=>{
+      const exEq=ex.eq||[];
+      const eqTags=exEq.length?exEq.map(id=>`<span class="eqtag ${eq[id]?'':'miss'}">${eqName(id)}</span>`).join(''):'<span class="eqtag">ไม่ใช้อุปกรณ์</span>';
+      const tips=(ex.tips||[]).map(t=>`<li>${t}</li>`).join('');
+      return `<div class="guide-ex">
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <div class="exicopic">${exIcon(ex.pic,32)}</div>
+          <div style="flex:1;min-width:0">
+            <div class="ex-name" style="font-size:14.5px">${ex.n}</div>
+            <div class="ex-th">${ex.th}</div>
+            <div class="eqtags">${eqTags}</div>
+            <ul class="tips">${tips}</ul>
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+    return `<div class="hcard">
+      <div class="cardhd">DAY ${d} · ${p.title} <span style="color:var(--muted);font-weight:400;font-size:12px">(${p.tag})</span></div>
+      ${items}
+    </div>`;
+  }).join('');
+
+  v.innerHTML=`
+    <div class="hcard">
+      <div class="cardhd">เช็คลิสต์อุปกรณ์ของฉัน</div>
+      ${eqRows}
+    </div>
+    <div class="cardhd" style="margin:18px 2px 12px">คู่มือท่าทางตามอุปกรณ์</div>
+    ${groups}
+  `;
+  v.querySelectorAll('.eqrow .chk').forEach(chk=>{
+    chk.addEventListener('click',()=>{
+      const id=chk.dataset.id;eq[id]=!eq[id];scheduleSave();renderGuide();
+    });
+  });
 }
 
 function renderRail(){
@@ -385,12 +833,62 @@ function renderRail(){
 }
 function chkIcon(){return '<svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg>'}
 
+function daySelectedIds(d){
+  const r=state.data.routine||(state.data.routine={});
+  if(!r[d])r[d]=PLAN[d].ex.filter(e=>!e.extra).map(e=>e.id);
+  return r[d];
+}
+function toggleExerciseInDay(d,id){
+  const ids=daySelectedIds(d);
+  const i=ids.indexOf(id);
+  if(i>=0)ids.splice(i,1);else ids.push(id);
+  scheduleSave();
+}
+function exReady(ex,eq){return !(ex.eq&&ex.eq.length)||ex.eq.every(id=>eq[id]);}
+
 function renderDay(){
   const p=PLAN[state.day];
   document.getElementById('dayTitle').textContent=p.title;
-  document.getElementById('dayCnt').textContent=`${p.ex.length} ท่า`;
+  const ids=daySelectedIds(state.day);
+  document.getElementById('dayCnt').textContent=`${ids.length} ท่า`;
   const list=document.getElementById('exList');list.innerHTML='';
-  p.ex.forEach(ex=>list.appendChild(exCard(ex)));
+  const exs=ids.map(id=>EX_BY_ID[id]).filter(Boolean);
+  if(!exs.length){
+    list.innerHTML=`<div class="empty" style="padding:40px 20px"><div class="ico">🎯</div><b>ยังไม่ได้เลือกท่า</b><p>แตะ "แก้ไขท่าเล่น" ด้านบนเพื่อเลือกท่าสำหรับวันนี้</p></div>`;
+    return;
+  }
+  exs.forEach(ex=>list.appendChild(exCard(ex)));
+}
+
+function openExercisePicker(){
+  document.getElementById('exPickerTitle').textContent=`เลือกท่าเล่น · ${PLAN[state.day].title}`;
+  renderExPickerList();
+  document.getElementById('exPickerOverlay').classList.add('show');
+}
+function closeExercisePicker(){document.getElementById('exPickerOverlay').classList.remove('show')}
+function renderExPickerList(){
+  const d=state.day;const eq=state.data.equipment||{};
+  const ids=daySelectedIds(d);
+  const pool=PLAN[d].ex.slice().sort((a,b)=>(exReady(a,eq)?0:1)-(exReady(b,eq)?0:1));
+  const list=document.getElementById('exPickerList');list.innerHTML='';
+  pool.forEach(ex=>{
+    const ready=exReady(ex,eq);
+    const checked=ids.includes(ex.id);
+    const eqTags=(ex.eq&&ex.eq.length)?ex.eq.map(id=>`<span class="eqtag ${eq[id]?'':'miss'}">${eqName(id)}</span>`).join(''):'<span class="eqtag">ไม่ใช้อุปกรณ์</span>';
+    const row=document.createElement('div');row.className='pickrow';
+    row.innerHTML=`
+      <div class="exicopic">${exIcon(ex.pic)}</div>
+      <div class="pickinfo">
+        <div class="pickname">${ex.n} ${ready?'<span class="rec">แนะนำ</span>':''}</div>
+        <div class="ex-th">${ex.th}</div>
+        <div class="eqtags">${eqTags}</div>
+      </div>
+      <div class="chk ${checked?'on':''}" data-id="${ex.id}">${checked?chkIcon():''}</div>`;
+    row.querySelector('.chk').addEventListener('click',()=>{
+      toggleExerciseInDay(d,ex.id);renderExPickerList();renderDay();renderRailDot();
+    });
+    list.appendChild(row);
+  });
 }
 
 function exCard(ex){
@@ -416,7 +914,8 @@ function exCard(ex){
   const isPR=tv>0&&lv>0&&tv>lv&&doneCount>=ex.s;
   card.innerHTML=`
     <div class="ex-top">
-      <div><div class="ex-name">${ex.n}</div><div class="ex-th">${ex.th}</div></div>
+      <div class="exicopic">${exIcon(ex.pic)}</div>
+      <div style="flex:1;min-width:0"><div class="ex-name">${ex.n}</div><div class="ex-th">${ex.th}</div></div>
       <div class="ex-target">เป้าหมาย<b>${ex.s}×${ex.r}</b></div>
     </div>
     <div class="last"><span class="lg">ครั้งก่อน:</span> ${lastStr||'—'} ${isPR?'<span class="pr">🏆 ทำลายสถิติ!</span>':''}</div>
@@ -660,7 +1159,17 @@ if('serviceWorker' in navigator){
   window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));
 }
 
-(function init(){load();document.getElementById('streakN').textContent=streak();renderRail();renderDay();})();
+document.getElementById('profilebar').addEventListener('click',openProfileModal);
+document.getElementById('profileClose').addEventListener('click',closeProfileModal);
+document.getElementById('profileOverlay').addEventListener('click',e=>{if(e.target.id==='profileOverlay')closeProfileModal()});
+document.getElementById('addUserBtn').addEventListener('click',()=>{
+  const inp=document.getElementById('newUserName');addUser(inp.value);inp.value='';renderUserList();
+});
+document.getElementById('newUserName').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('addUserBtn').click()});
+document.getElementById('exPickerClose').addEventListener('click',closeExercisePicker);
+document.getElementById('exPickerOverlay').addEventListener('click',e=>{if(e.target.id==='exPickerOverlay')closeExercisePicker()});
+
+(function init(){load();document.getElementById('streakN').textContent=streak();renderProfileBar();renderRail();renderDay();})();
 </script>
 </body>
 </html>
