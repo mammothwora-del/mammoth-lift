@@ -250,6 +250,24 @@
   .pickinfo{flex:1;min-width:0}
   .pickname{font-family:var(--disp);font-weight:600;font-size:14px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
   .rec{font-size:9.5px;background:var(--green-soft);color:var(--green);padding:2px 7px;border-radius:20px;font-weight:700;letter-spacing:.2px}
+
+  .progbar{margin:0 0 12px}
+  .pnotes{background:var(--surface);border:1px solid var(--border);border-radius:13px;padding:11px 13px;margin:0 0 14px}
+  .pnotes summary{font-family:var(--disp);font-weight:600;font-size:13px;cursor:pointer;color:var(--text);list-style:none}
+  .pnotes summary::-webkit-details-marker{display:none}
+  .pnotes summary::after{content:' ▾';color:var(--faint)}
+  .pnotes[open] summary::after{content:' ▴'}
+  .pnotes .pn-sec{margin-top:10px}
+  .pnotes .pn-sec b{font-family:var(--disp);font-size:12px;color:var(--gold);display:block;margin-bottom:3px;font-weight:600}
+  .pnotes ol,.pnotes p{margin:0;font-size:12px;color:var(--muted);line-height:1.6}
+  .pnotes ol{padding-left:18px}
+  .exmeta{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .chip{font-size:10.5px;font-family:var(--disp);font-weight:600;padding:3px 9px;border-radius:20px;background:var(--surface2);color:var(--muted)}
+  .chip.tempo{background:var(--gold-soft);color:var(--gold)}
+  .chip.note{white-space:normal}
+  .chip.up{background:var(--green-soft);color:var(--green)}
+  .finhd{font-family:var(--disp);font-weight:700;font-size:14px;color:var(--ember);margin:20px 2px 10px;display:flex;justify-content:space-between;align-items:baseline}
+  .finhd small{font-weight:500;font-size:11.5px;color:var(--muted)}
 </style>
 </head>
 <body>
@@ -259,7 +277,7 @@
       <div class="mark">M</div>
       <div>
         <h1>MAMMOTH LIFT</h1>
-        <span>Recomp · 5-Day Split</span>
+        <span id="progSub">Recomp · 5-Day Split</span>
       </div>
     </div>
     <div class="streak">
@@ -285,6 +303,14 @@
   </div>
 
   <div id="workoutView">
+    <div class="profilebar progbar" id="progbar">
+      <div class="pinfo">
+        <div class="pavatar">📋</div>
+        <div class="ptext"><b id="progName"></b><span id="progInfo"></span></div>
+      </div>
+      <button class="pswitch" type="button">เปลี่ยน</button>
+    </div>
+    <div id="progNotes"></div>
     <div class="rail" id="rail"></div>
     <div class="dayhead">
       <div class="dhinfo">
@@ -313,6 +339,13 @@
       <input type="text" id="newUserName" placeholder="ชื่อคนใหม่...">
       <button id="addUserBtn" type="button">+ เพิ่ม</button>
     </div>
+  </div>
+</div>
+
+<div class="overlay" id="progOverlay">
+  <div class="sheet">
+    <div class="sheethd"><h3>เลือกโปรแกรม</h3><button class="sheetclose" id="progClose">✕</button></div>
+    <div id="progList"></div>
   </div>
 </div>
 
@@ -383,6 +416,7 @@ const EX_ICONS={
   pullup:'<line x1="10" y1="8" x2="54" y2="8"/><line x1="20" y1="8" x2="20" y2="16"/><line x1="44" y1="8" x2="44" y2="16"/><circle cx="32" cy="24" r="6" fill="currentColor" stroke="none"/><line x1="32" y1="30" x2="32" y2="44"/><line x1="32" y1="44" x2="26" y2="58"/><line x1="32" y1="44" x2="38" y2="58"/><line x1="20" y1="16" x2="27" y2="24"/><line x1="44" y1="16" x2="37" y2="24"/>',
   jumprope:'<circle cx="32" cy="10" r="6" fill="currentColor" stroke="none"/><line x1="32" y1="16" x2="32" y2="36"/><line x1="32" y1="36" x2="26" y2="52"/><line x1="32" y1="36" x2="38" y2="52"/><path d="M20 20 C20 44,44 44,44 20"/><line x1="20" y1="58" x2="44" y2="58"/>',
   carry:'<circle cx="32" cy="10" r="6" fill="currentColor" stroke="none"/><line x1="32" y1="16" x2="32" y2="38"/><line x1="32" y1="38" x2="26" y2="48"/><line x1="26" y1="48" x2="30" y2="58"/><line x1="32" y1="38" x2="38" y2="48"/><line x1="38" y1="48" x2="34" y2="58"/><line x1="32" y1="18" x2="22" y2="34"/><circle cx="22" cy="36" r="4" fill="currentColor" stroke="none"/><line x1="32" y1="18" x2="42" y2="34"/><circle cx="42" cy="36" r="4" fill="currentColor" stroke="none"/>',
+  deadbug:'<line x1="14" y1="46" x2="42" y2="46"/><circle cx="48" cy="46" r="6" fill="currentColor" stroke="none"/><line x1="38" y1="46" x2="38" y2="20"/><line x1="18" y1="46" x2="22" y2="28"/><line x1="22" y1="28" x2="10" y2="28"/><line x1="16" y1="46" x2="6" y2="40"/>',
   generic:'<circle cx="32" cy="14" r="6" fill="currentColor" stroke="none"/><line x1="32" y1="20" x2="32" y2="40"/><line x1="32" y1="40" x2="24" y2="58"/><line x1="32" y1="40" x2="40" y2="58"/><line x1="32" y1="22" x2="20" y2="34"/><line x1="32" y1="22" x2="44" y2="34"/>',
 };
 function exIcon(key,size){
@@ -593,7 +627,132 @@ const PLAN={
     ]},
   ]},
 };
-const EX_BY_ID={};for(const d in PLAN)PLAN[d].ex.forEach(e=>EX_BY_ID[e.id]={...e,day:+d});
+
+// ---- Dumbbell Recomp 4 วัน: ท่าใหม่ (ท่าที่มีอยู่แล้วอ้างผ่าน ref เพื่อใช้ id/ประวัติเดิม) ----
+const DB4_NEW={
+  hip:{id:'db4_hip',n:'Hip Thrust',th:'ฮิปทรัสต์ (หลังพิงโซฟา)',s:3,r:'15-20',t:'db',eq:['db'],pic:'bridge',tips:[
+    'นั่งพื้น พิงสะบักกับขอบโซฟา ชันเข่า วางดัมเบลบนสะโพก',
+    'ดันสะโพกขึ้นจนลำตัวขนานพื้นตั้งแต่ไหล่ถึงเข่า บีบก้นค้างไว้สั้นๆ',
+    'คางชิดอก ไม่แอ่นหลังส่วนล่าง ลดสะโพกลงช้าๆ',
+  ]},
+  calf1:{id:'db4_calf1',n:'Single-leg Calf Raise',th:'เขย่งน่องขาเดียว',s:3,r:'15-20',t:'db',eq:['db'],pic:'calfraise',tips:[
+    'ยืนขาเดียว มือหนึ่งจับผนังหรือเก้าอี้ อีกมือถือดัมเบล (ถ้าต้องการ)',
+    'เขย่งขึ้นสูงสุด ค้างบีบน่อง 1 วินาที แล้วลดลงช้าๆ',
+    'ยืนบนขอบบันไดเพื่อเพิ่มช่วงการเคลื่อนไหว',
+  ]},
+  arnold:{id:'db4_arnold',n:'Arnold Press',th:'อาร์โนลด์เพรส',s:3,r:'10-12',t:'db',eq:['db'],pic:'overhead',tips:[
+    'เริ่มที่ดัมเบลระดับคาง ฝ่ามือหันเข้าหาตัว ศอกอยู่ด้านหน้า',
+    'ดันขึ้นพร้อมหมุนข้อมือจนฝ่ามือหันไปด้านหน้าเมื่อแขนเหยียดสุด',
+    'หมุนกลับระหว่างลดลง เกร็งแกนกลางลำตัว ไม่แอ่นหลัง',
+  ]},
+  rlunge:{id:'db4_rlunge',n:'Reverse Lunge',th:'ลันจ์ถอยหลัง',s:4,r:'10-12',t:'db',eq:['db'],pic:'lunge',tips:[
+    'ถือดัมเบลข้างลำตัว ก้าวขาหนึ่งถอยหลังยาวๆ',
+    'ย่อลงจนเข่าหลังเกือบแตะพื้น น้ำหนักอยู่ที่ส้นเท้าขาหน้า',
+    'ดันขาหน้ากลับมายืน ทำครบข้างหนึ่งแล้วค่อยสลับ',
+  ]},
+  slrdl:{id:'db4_slrdl',n:'Single-leg RDL',th:'RDL ขาเดียว',s:3,r:'10-12',t:'db',eq:['db'],pic:'hinge',tips:[
+    'ยืนขาเดียว เข่างอเล็กน้อย ถือดัมเบลด้วยมือฝั่งตรงข้ามหรือสองมือ',
+    'พับสะโพก ยื่นขาหลังเหยียดไปด้านหลังจนลำตัวเกือบขนานพื้น สะโพกไม่บิด',
+    'ดันสะโพกกลับขึ้นยืนตรง ใช้ต้นขาหลังและก้น',
+  ]},
+  sumo:{id:'db4_sumo',n:'Sumo Squat',th:'ซูโม่สควอท',s:3,r:'15',t:'db',eq:['db'],pic:'squat',tips:[
+    'ยืนเท้ากว้าง ปลายเท้าชี้ออกประมาณ 45 องศา ถือดัมเบลแนวตั้งระหว่างขา',
+    'ย่อลงตรงๆ หลังตรง เข่าไปทางเดียวกับปลายเท้า',
+    'ค้างที่ด้านล่าง 2 วินาที แล้วดันพื้นยืนขึ้น',
+  ]},
+  deadbug:{id:'db4_deadbug',n:'Dead Bug',th:'เดดบั๊ก (แกนกลาง)',s:3,r:'10',t:'bw',eq:['mat'],pic:'deadbug',tips:[
+    'นอนหงาย แขนชี้เพดาน เข่างอ 90 องศายกขึ้น หลังล่างกดแนบพื้น',
+    'เหยียดแขนข้างหนึ่งไปเหนือหัวพร้อมขาฝั่งตรงข้ามลงใกล้พื้น',
+    'กลับจุดเริ่มแล้วสลับข้าง หลังล่างห้ามลอยจากพื้น',
+  ]},
+};
+const DB4_FIN=[
+  {ref:'d5a',s:4,r:'40 วิ',eq:['db'],fin:true},
+  {ref:'d5b',s:4,r:'40 วิ',eq:['db','mat'],fin:true},
+  {ref:'d5f',s:4,r:'40 วิ',eq:['db'],fin:true},
+  {ref:'d5e',s:4,r:'40',fin:true},
+];
+
+const PROGRAMS={
+  recomp5:{name:'Recomp · 5-Day Split',days:PLAN},
+  db4:{
+    name:'Dumbbell Recomp 4 วัน',maxKg:10,
+    finisher:'วงจร 4 รอบ · ท่าละ 40 วิ พัก 20 วิ',
+    notes:{
+      goal:'เพิ่มกล้ามเนื้อ + ลดไขมัน · ดัมเบลปรับได้ สูงสุด 10 kg/ข้าง · ไม่มีม้านั่ง (ใช้เก้าอี้/โซฟา)',
+      session:'วอร์มอัพ 10 นาทีก่อนทุกวัน · พักระหว่างเซ็ต 60-90 วิ · ทุกเซ็ตเหลือแรงอีก 1-2 ครั้ง (RIR 1-2) · ปิดท้ายด้วย Finisher ทุกวัน',
+      progression:['เพิ่มน้ำหนัก 1-2 kg','ถ้าเต็ม 10 kg แล้ว ให้ลงช้า 3-4 วินาที','ค้างจังหวะที่ยากที่สุด 1-2 วินาที','ทำแบบ 1.5 reps','ลดเวลาพัก'],
+      rest:'วันพัก (พุธ เสาร์ อาทิตย์): เดิน 8,000-10,000 ก้าว',
+    },
+    days:{
+      1:{title:'Upper A',tag:'เน้นดัน',dow:'จันทร์',wd:1,ex:[
+        {ref:'d1a',s:4,r:'10-12'},
+        {ref:'d2a',s:4,r:'10-12',side:true,eq:['db'],note:'มือยันเก้าอี้แทนม้านั่ง'},
+        {ref:'d4a',s:3,r:'10-12',note:'ยืนเล่น (Standing)'},
+        {ref:'d1c',s:3,r:'เกือบหมดแรง',note:'AMRAP เหลือ 1-2 ครั้ง · ง่ายไปให้ยกเท้าวางบนเก้าอี้'},
+        {ref:'d4b',s:3,r:'15'},
+        {ref:'d1e',s:3,r:'12-15'},
+        ...DB4_FIN]},
+      2:{title:'Lower A',tag:'เน้นสควอท',dow:'อังคาร',wd:2,ex:[
+        {ref:'d3a',s:4,r:'12-15',tempo:'ลงช้า 3 วิ'},
+        {ref:'d3b',s:3,r:'10-12',side:true,eq:['db'],note:'เท้าหลังวางบนโซฟา'},
+        {ref:'d3c',s:4,r:'12-15'},
+        {...DB4_NEW.hip},
+        {...DB4_NEW.calf1,side:true},
+        {ref:'d5g',s:3,r:'45'},
+        ...DB4_FIN]},
+      3:{title:'Upper B',tag:'เน้นดึง',dow:'พฤหัส',wd:4,ex:[
+        {ref:'d2b',s:4,r:'10-12'},
+        {ref:'d1d',s:3,r:'12-15',eq:['db','mat'],note:'เล่นบนพื้น (Floor Fly)'},
+        {...DB4_NEW.arnold},
+        {ref:'d4d',s:3,r:'15',eq:['db']},
+        {ref:'d2d',s:3,r:'12',eq:['db','mat'],note:'เล่นบนพื้น (Floor Pullover)'},
+        {ref:'d2f',s:3,r:'10-12',note:'สลับสัปดาห์กับ Bicep Curl'},
+        {ref:'d2e',s:3,r:'10-12',extra:true,note:'สลับสัปดาห์กับ Hammer Curl'},
+        ...DB4_FIN]},
+      4:{title:'Lower B',tag:'ขาเดียว/สะโพก',dow:'ศุกร์',wd:5,ex:[
+        {...DB4_NEW.rlunge,side:true},
+        {...DB4_NEW.slrdl,side:true},
+        {ref:'d3i',s:3,r:'10',side:true,eq:['db'],extra:false,note:'ใช้เก้าอี้ที่มั่นคง'},
+        {...DB4_NEW.sumo,tempo:'ค้างด้านล่าง 2 วิ'},
+        {...DB4_NEW.deadbug,side:true},
+        ...DB4_FIN]},
+    },
+  },
+};
+
+// base definitions by id (first definition wins) — used for logs/history/volume
+const EX_BY_ID={};
+for(const d in PLAN)PLAN[d].ex.forEach(e=>{if(!EX_BY_ID[e.id])EX_BY_ID[e.id]={...e}});
+for(const k in DB4_NEW)EX_BY_ID[DB4_NEW[k].id]={...DB4_NEW[k]};
+// resolve ref entries into full exercise objects (same id as the original → shared history)
+for(const pid in PROGRAMS){
+  const days=PROGRAMS[pid].days;
+  for(const d in days)days[d].ex=days[d].ex.map(e=>{
+    if(!e.ref)return e;
+    const base=EX_BY_ID[e.ref];if(!base)throw new Error('unknown exercise ref '+e.ref);
+    const {ref,...over}=e;return {...base,...over,id:ref};
+  });
+}
+function progId(){return PROGRAMS[state.data&&state.data.program]?state.data.program:'recomp5'}
+function prog(){return PROGRAMS[progId()]}
+function curDays(){return prog().days}
+function dayNums(){return Object.keys(curDays()).map(Number).sort((a,b)=>a-b)}
+function dayLabel(d){const p=curDays()[d];return p&&p.dow?p.dow:`DAY ${d}`}
+function routineKey(d){return progId()==='recomp5'?d:`${progId()}:${d}`}
+function pickDefaultDay(){
+  const days=curDays();const wd=new Date().getDay();
+  const match=dayNums().find(d=>days[d].wd===wd);
+  if(match)state.day=match;
+  else if(!days[state.day])state.day=dayNums()[0];
+}
+function findDay(id){
+  for(const pid of [progId(),...Object.keys(PROGRAMS)]){
+    const days=PROGRAMS[pid].days;
+    for(const d in days)if(days[d].ex.some(e=>e.id===id&&!e.fin))return {pid,d:+d};
+  }
+  return null;
+}
 function eqName(id){const e=EQUIPMENT_LIST.find(x=>x.id===id);return e?e.n:id}
 
 const AVATAR_EMOJIS=['🦣','💪','🔥','⚡','🐯','🦁','🥊','🏋️','🐺','🚀'];
@@ -679,7 +838,8 @@ function deleteUser(id){
 }
 function fullRerender(){
   document.getElementById('streakN').textContent=streak();
-  renderProfileBar();renderRail();renderDay();
+  pickDefaultDay();
+  renderProfileBar();renderProgram();renderRail();renderDay();
   if(state.view==='history')renderHistory();
   if(state.view==='dashboard')renderDashboard();
   if(state.view==='nutrition')renderNutrition();
@@ -705,6 +865,41 @@ function renderUserList(){
     list.appendChild(row);
   });
 }
+function renderProgram(){
+  const p=prog();
+  document.getElementById('progSub').textContent=p.name;
+  document.getElementById('progName').textContent=p.name;
+  const n=dayNums().length;
+  document.getElementById('progInfo').textContent=`${n} วัน/สัปดาห์ · แตะเพื่อเปลี่ยนโปรแกรม`;
+  const box=document.getElementById('progNotes');
+  if(!p.notes){box.innerHTML='';return}
+  const nt=p.notes;
+  box.innerHTML=`<details class="pnotes"><summary>รายละเอียดโปรแกรม &amp; กฎการพัฒนา</summary>
+    <div class="pn-sec"><b>เป้าหมาย</b><p>${nt.goal}</p></div>
+    <div class="pn-sec"><b>ทุกวันฝึก</b><p>${nt.session}</p></div>
+    ${p.finisher?`<div class="pn-sec"><b>Finisher</b><p>${p.finisher}</p></div>`:''}
+    <div class="pn-sec"><b>กฎการพัฒนา (เมื่อทำครบเรปสูงสุดทุกเซ็ต)</b><ol>${nt.progression.map(s=>`<li>${s}</li>`).join('')}</ol></div>
+    <div class="pn-sec"><b>วันพัก</b><p>${nt.rest}</p></div>
+  </details>`;
+}
+function renderProgList(){
+  const list=document.getElementById('progList');list.innerHTML='';
+  for(const pid in PROGRAMS){
+    const p=PROGRAMS[pid];const on=pid===progId();
+    const days=Object.keys(p.days).map(d=>p.days[d].dow||p.days[d].title).join(' · ');
+    const row=document.createElement('div');row.className='urow'+(on?' active':'');
+    row.innerHTML=`<div class="pavatar">📋</div><div class="un"><b>${p.name}</b><span>${days}</span></div>`;
+    row.addEventListener('click',()=>{switchProgram(pid);closeProgModal()});
+    list.appendChild(row);
+  }
+}
+function switchProgram(pid){
+  if(pid===progId())return;
+  state.data.program=pid;
+  persistRoot();fullRerender();
+}
+function openProgModal(){renderProgList();document.getElementById('progOverlay').classList.add('show')}
+function closeProgModal(){document.getElementById('progOverlay').classList.remove('show')}
 function openProfileModal(){renderUserList();document.getElementById('profileOverlay').classList.add('show')}
 function closeProfileModal(){document.getElementById('profileOverlay').classList.remove('show')}
 
@@ -780,9 +975,9 @@ function renderGuide(){
     return `<div class="eqrow"><span class="en">${it.n}</span><div class="chk ${on?'on':''}" data-id="${it.id}">${on?chkIcon():''}</div></div>`;
   }).join('');
 
-  const groups=[1,2,3,4,5].map(d=>{
-    const p=PLAN[d];
-    const items=p.ex.map(ex=>{
+  const groups=dayNums().map(d=>{
+    const p=curDays()[d];
+    const items=p.ex.filter(ex=>!ex.fin||d===dayNums()[0]).map(ex=>{
       const exEq=ex.eq||[];
       const eqTags=exEq.length?exEq.map(id=>`<span class="eqtag ${eq[id]?'':'miss'}">${eqName(id)}</span>`).join(''):'<span class="eqtag">ไม่ใช้อุปกรณ์</span>';
       const tips=(ex.tips||[]).map(t=>`<li>${t}</li>`).join('');
@@ -799,7 +994,7 @@ function renderGuide(){
       </div>`;
     }).join('');
     return `<div class="hcard">
-      <div class="cardhd">DAY ${d} · ${p.title} <span style="color:var(--muted);font-weight:400;font-size:12px">(${p.tag})</span></div>
+      <div class="cardhd">${dayLabel(d)} · ${p.title} <span style="color:var(--muted);font-weight:400;font-size:12px">(${p.tag})</span></div>
       ${items}
     </div>`;
   }).join('');
@@ -821,22 +1016,39 @@ function renderGuide(){
 
 function renderRail(){
   const rail=document.getElementById('rail');rail.innerHTML='';
-  for(let d=1;d<=5;d++){
-    const p=PLAN[d];
-    const activeToday=p.ex.some(e=>{const t=todayEntry(e.id);return t&&t.sets.some(s=>s.done)});
+  for(const d of dayNums()){
+    const p=curDays()[d];
+    const activeToday=dayActiveToday(d);
     const el=document.createElement('div');
     el.className='daycard'+(d===state.day?' on':'');
     el.onclick=()=>{state.day=d;renderRail();renderDay()};
-    el.innerHTML=`<div class="dn">DAY ${d}</div><div class="dt">${p.title}</div><div class="dtag">${p.tag}</div>${activeToday?'<div class="dot"></div>':''}`;
+    el.innerHTML=`<div class="dn">${dayLabel(d)}</div><div class="dt">${p.title}</div><div class="dtag">${p.tag}</div>${activeToday?'<div class="dot"></div>':''}`;
     rail.appendChild(el);
   }
 }
 function chkIcon(){return '<svg viewBox="0 0 24 24"><polyline points="4 12 10 18 20 6"/></svg>'}
 
+// finisher is shared by every day, so it doesn't count toward a day's "trained today" dot
+function dayActiveToday(d){return curDays()[d].ex.some(e=>{if(e.fin)return false;const t=todayEntry(e.id);return t&&t.sets.some(s=>s.done)})}
 function daySelectedIds(d){
   const r=state.data.routine||(state.data.routine={});
-  if(!r[d])r[d]=PLAN[d].ex.filter(e=>!e.extra).map(e=>e.id);
-  return r[d];
+  const k=routineKey(d);
+  if(!r[k])r[k]=curDays()[d].ex.filter(e=>!e.extra).map(e=>e.id);
+  return r[k];
+}
+// top of a rep range like '10-12' → 12, '15' → 15; non-numeric targets → null
+function repTop(r){const m=String(r).match(/(\d+)\s*(?:วิ)?\s*$/);return m?+m[1]:null}
+function progressionHint(ex){
+  const p=prog();if(!p.notes||ex.fin)return '';
+  const top=repTop(ex.r);const last=lastEntry(ex.id);
+  if(!top||!last)return '';
+  const done=last.sets.filter(s=>s.done);
+  if(done.length<ex.s||!done.every(s=>(parseFloat(s.r)||0)>=top))return '';
+  if(ex.t==='db'){
+    const w=Math.max(...done.map(s=>parseFloat(s.w)||0));
+    if(w<(p.maxKg||Infinity))return `⬆ พร้อมเพิ่มความยาก: +1-2 kg (ครั้งก่อน ${w} กก.)`;
+  }
+  return '⬆ พร้อมเพิ่มความยาก: ลงช้า 3-4 วิ → ค้าง 1-2 วิ → 1.5 reps → ลดพัก';
 }
 function toggleExerciseInDay(d,id){
   const ids=daySelectedIds(d);
@@ -847,21 +1059,31 @@ function toggleExerciseInDay(d,id){
 function exReady(ex,eq){return !(ex.eq&&ex.eq.length)||ex.eq.every(id=>eq[id]);}
 
 function renderDay(){
-  const p=PLAN[state.day];
+  const p=curDays()[state.day];
   document.getElementById('dayTitle').textContent=p.title;
   const ids=daySelectedIds(state.day);
   document.getElementById('dayCnt').textContent=`${ids.length} ท่า`;
   const list=document.getElementById('exList');list.innerHTML='';
-  const exs=ids.map(id=>EX_BY_ID[id]).filter(Boolean);
+  // keep program order (main lifts first, finisher last) regardless of toggle order
+  const exs=p.ex.filter(e=>ids.includes(e.id));
   if(!exs.length){
     list.innerHTML=`<div class="empty" style="padding:40px 20px"><div class="ico">🎯</div><b>ยังไม่ได้เลือกท่า</b><p>แตะ "แก้ไขท่าเล่น" ด้านบนเพื่อเลือกท่าสำหรับวันนี้</p></div>`;
     return;
   }
-  exs.forEach(ex=>list.appendChild(exCard(ex)));
+  let finShown=false;
+  exs.forEach(ex=>{
+    if(ex.fin&&!finShown){
+      finShown=true;
+      const h=document.createElement('div');h.className='finhd';
+      h.innerHTML=`🔥 Finisher <small>${prog().finisher||''}</small>`;
+      list.appendChild(h);
+    }
+    list.appendChild(exCard(ex));
+  });
 }
 
 function openExercisePicker(){
-  document.getElementById('exPickerTitle').textContent=`เลือกท่าเล่น · ${PLAN[state.day].title}`;
+  document.getElementById('exPickerTitle').textContent=`เลือกท่าเล่น · ${curDays()[state.day].title}`;
   renderExPickerList();
   document.getElementById('exPickerOverlay').classList.add('show');
 }
@@ -869,7 +1091,7 @@ function closeExercisePicker(){document.getElementById('exPickerOverlay').classL
 function renderExPickerList(){
   const d=state.day;const eq=state.data.equipment||{};
   const ids=daySelectedIds(d);
-  const pool=PLAN[d].ex.slice().sort((a,b)=>(exReady(a,eq)?0:1)-(exReady(b,eq)?0:1));
+  const pool=curDays()[d].ex.slice().sort((a,b)=>(exReady(a,eq)?0:1)-(exReady(b,eq)?0:1));
   const list=document.getElementById('exPickerList');list.innerHTML='';
   pool.forEach(ex=>{
     const ready=exReady(ex,eq);
@@ -879,7 +1101,7 @@ function renderExPickerList(){
     row.innerHTML=`
       <div class="exicopic">${exIcon(ex.pic)}</div>
       <div class="pickinfo">
-        <div class="pickname">${ex.n} ${ready?'<span class="rec">แนะนำ</span>':''}</div>
+        <div class="pickname">${ex.n} ${ready?'<span class="rec">แนะนำ</span>':''}${ex.fin?' <span class="rec" style="background:var(--ember-soft);color:var(--ember)">Finisher</span>':''}</div>
         <div class="ex-th">${ex.th}</div>
         <div class="eqtags">${eqTags}</div>
       </div>
@@ -912,12 +1134,19 @@ function exCard(ex){
   const tv=volume(today,ex.t),lv=volume(last,ex.t);
   const doneCount=today?today.sets.filter(s=>s.done).length:0;
   const isPR=tv>0&&lv>0&&tv>lv&&doneCount>=ex.s;
+  const hint=progressionHint(ex);
+  const chips=[
+    ex.tempo?`<span class="chip tempo">⏱ ${ex.tempo}</span>`:'',
+    ex.note?`<span class="chip note">${ex.note}</span>`:'',
+    hint?`<span class="chip up">${hint}</span>`:'',
+  ].join('');
   card.innerHTML=`
     <div class="ex-top">
       <div class="exicopic">${exIcon(ex.pic)}</div>
       <div style="flex:1;min-width:0"><div class="ex-name">${ex.n}</div><div class="ex-th">${ex.th}</div></div>
-      <div class="ex-target">เป้าหมาย<b>${ex.s}×${ex.r}</b></div>
+      <div class="ex-target">เป้าหมาย<b>${ex.s}×${ex.r}${ex.side?' /ข้าง':''}</b></div>
     </div>
+    ${chips?`<div class="exmeta">${chips}</div>`:''}
     <div class="last"><span class="lg">ครั้งก่อน:</span> ${lastStr||'—'} ${isPR?'<span class="pr">🏆 ทำลายสถิติ!</span>':''}</div>
     <div class="sets">${rows}</div>
     <button class="addset">+ เพิ่มเซ็ต</button>`;
@@ -953,8 +1182,9 @@ function updatePR(card,ex){
   if(!isPR&&existing)existing.remove();
 }
 function renderRailDot(){
+  const nums=dayNums();
   document.querySelectorAll('#rail .daycard').forEach((c,idx)=>{
-    const d=idx+1;const active=PLAN[d].ex.some(e=>{const t=todayEntry(e.id);return t&&t.sets.some(s=>s.done)});
+    const active=dayActiveToday(nums[idx]);
     let dot=c.querySelector('.dot');
     if(active&&!dot){const el=document.createElement('div');el.className='dot';c.appendChild(el)}
     if(!active&&dot)dot.remove();
@@ -973,7 +1203,8 @@ function renderDashboard(){
   const wdates=weekDates();
   const trained=trainedSet();
   const daysTrained=wdates.filter(d=>trained.has(d)).length;
-  const pctRaw=daysTrained*20;
+  const goalDays=dayNums().length;
+  const pctRaw=Math.round(daysTrained*100/goalDays);
   const pctBar=Math.min(100,pctRaw);
   const weekVol=wdates.reduce((s,d)=>s+dayVolume(d),0);
   const weekSets=wdates.reduce((s,d)=>s+daySets(d),0);
@@ -982,9 +1213,9 @@ function renderDashboard(){
   const nt=nutriTotals(today);
   const goals=state.data.nutrition.goals;
 
-  const sub=daysTrained>5?`ทำเกินเป้าหมาย +${daysTrained-5} วัน เยี่ยมมาก! 🔥`
-    :daysTrained===5?'ครบเป้าหมายสัปดาห์นี้แล้ว! 🎉'
-    :'แต่ละวันที่ออกกำลังกาย = 20% ของเป้าหมาย';
+  const sub=daysTrained>goalDays?`ทำเกินเป้าหมาย +${daysTrained-goalDays} วัน เยี่ยมมาก! 🔥`
+    :daysTrained===goalDays?'ครบเป้าหมายสัปดาห์นี้แล้ว! 🎉'
+    :`แต่ละวันที่ออกกำลังกาย = ${Math.round(100/goalDays)}% ของเป้าหมาย`;
 
   const weekDotsHtml=wdates.map((d,i)=>{
     const isToday=d===today;const done=trained.has(d);
@@ -1000,7 +1231,7 @@ function renderDashboard(){
 
   v.innerHTML=`
     <div class="hcard">
-      <div class="cardhd">เป้าหมายสัปดาห์นี้ <span style="color:var(--muted);font-weight:400">· ${Math.min(daysTrained,5)}/5 วัน</span></div>
+      <div class="cardhd">เป้าหมายสัปดาห์นี้ <span style="color:var(--muted);font-weight:400">· ${Math.min(daysTrained,goalDays)}/${goalDays} วัน</span></div>
       <div class="calhero"><b>${pctRaw}%</b><span><br>${sub}</span></div>
       <div class="pbar"><i style="width:${pctBar}%"></i></div>
       <div class="weekdots">${weekDotsHtml}</div>
@@ -1129,15 +1360,18 @@ function renderHistory(){
   if(!dates.length){v.innerHTML=`<div class="empty"><div class="ico">🏋️</div><b>ยังไม่มีประวัติ</b><p>เริ่มบันทึกเซ็ตแรกของคุณ<br>แล้วสถิติจะมาโชว์ที่นี่</p></div>`;return}
   v.innerHTML='';
   dates.forEach(date=>{
-    const items=byDate[date];const dayCount={};
-    items.forEach(it=>{const dy=EX_BY_ID[it.id].day;dayCount[dy]=(dayCount[dy]||0)+1});
-    const dayNum=Object.keys(dayCount).sort((a,b)=>dayCount[b]-dayCount[a])[0];
+    const items=byDate[date].filter(it=>EX_BY_ID[it.id]);if(!items.length)return;
+    const dayCount={};
+    items.forEach(it=>{const f=findDay(it.id);if(!f)return;const k=f.pid+'|'+f.d;dayCount[k]=(dayCount[k]||0)+1});
+    const best=Object.keys(dayCount).sort((a,b)=>dayCount[b]-dayCount[a])[0];
+    let dayLbl='';
+    if(best){const[pid,d]=best.split('|');const pd=PROGRAMS[pid].days[d];dayLbl=`${pd.dow||'Day '+d} · ${pd.title}`}
     let total=0;const rows=[];
     items.forEach(it=>{const ex=EX_BY_ID[it.id];const vol=volume(it.entry,ex.t);total+=ex.t==='db'?vol:0;
       rows.push(`<div class="hex-row"><span>${ex.n}</span><span>${sumSetStr(it.entry,ex.t)||'—'}</span></div>`)});
     const card=document.createElement('div');card.className='hcard';
     card.innerHTML=`<div class="hd">
-        <div><div class="hdate">${fmtDate(date)}</div><div class="hday">Day ${dayNum} · ${PLAN[dayNum].title}</div></div>
+        <div><div class="hdate">${fmtDate(date)}</div><div class="hday">${dayLbl}</div></div>
         <div class="hvol"><b>${Math.round(total).toLocaleString()}</b><small>kg volume</small></div>
       </div><div class="hex">${rows.join('')}</div>`;
     v.appendChild(card);
@@ -1166,10 +1400,13 @@ document.getElementById('addUserBtn').addEventListener('click',()=>{
   const inp=document.getElementById('newUserName');addUser(inp.value);inp.value='';renderUserList();
 });
 document.getElementById('newUserName').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('addUserBtn').click()});
+document.getElementById('progbar').addEventListener('click',openProgModal);
+document.getElementById('progClose').addEventListener('click',closeProgModal);
+document.getElementById('progOverlay').addEventListener('click',e=>{if(e.target.id==='progOverlay')closeProgModal()});
 document.getElementById('exPickerClose').addEventListener('click',closeExercisePicker);
 document.getElementById('exPickerOverlay').addEventListener('click',e=>{if(e.target.id==='exPickerOverlay')closeExercisePicker()});
 
-(function init(){load();document.getElementById('streakN').textContent=streak();renderProfileBar();renderRail();renderDay();})();
+(function init(){load();pickDefaultDay();document.getElementById('streakN').textContent=streak();renderProfileBar();renderProgram();renderRail();renderDay();})();
 </script>
 </body>
 </html>

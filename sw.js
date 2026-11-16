@@ -1,4 +1,4 @@
-const CACHE = 'mammoth-lift-v3';
+const CACHE = 'mammoth-lift-v4';
 const ASSETS = [
   './',
   './index.html',
